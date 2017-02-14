@@ -1,0 +1,23 @@
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    DEBUG <small>variables de la aplicacion en sesion</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="/">Principal</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">Debug</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+
+<div class="row">
+<?php
+    \Zend\Debug\Debug::dump($this->sesion_variables);
+?>
+</div>

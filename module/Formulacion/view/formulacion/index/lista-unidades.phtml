@@ -1,0 +1,537 @@
+<div id="result">
+<!--  BEGIN MODAL-->
+    <!--<div class="modal fade" id="modal_nuevo" tabindex="-1" role="basic" aria-hidden="true" data-backdrop="static" data-keyboard="true">
+        <div class="modal-dialog modal-full">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>-->
+    <!--  END MODAL-->
+
+    <!--<link rel="stylesheet" type="text/css" href="/assets/global/plugins/jstree/dist/themes/default/style.min.css"/>-->
+    <!--<script src="/assets/global/plugins/jstree/dist/jstree.js"></script>-->
+    <!--<script src="/assets/admin/pages/scripts/ui-tree.js"></script>-->
+
+    <div class="portlet blue-hoki box">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-cogs"></i>Formulacion POAI
+            </div>
+            <form class="navbar-form navbar-header" role="form">
+                <div class="form-group">
+                    <select class="form-control  input-sm input-large" data-toggle="tooltip"
+                            data-placement="left" title=""
+                            id="idGestionPeriodo" onchange="cambiarPeriodo(this.value)"  style="color: ;font-size: 10px">
+
+                        <option value="" disabled>--Seleccione una opcion--</option>
+                        <?php foreach($this->listadoPeriodos as $periodo){ ?>
+                            <option value="<?php echo $periodo['id_gp'] ?>" title="<?php echo $periodo['descripcion'] ?>">
+                                <?php echo "[Periodo: ".$periodo['periodo']."/".$periodo['gestion']."] ".$periodo['descripcion'] ?>
+                            </option>
+                        <?php } ?>
+
+                    </select>
+                </div>
+            </form>
+            <div class="tools">
+                <a href="javascript:;" class="collapse">
+                </a>
+                <a href="#portlet-config" data-toggle="modal" class="config">
+                </a>
+                <a href="javascript:;" class="reload">
+                </a>
+                <a href="javascript:;" class="remove">
+                </a>
+            </div>
+        </div>
+        <?php
+        //echo //$this->numWord;
+        //echo  MisLibrerias\DatosSesion::getNivelUnidad();?>
+        <div class="portlet-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div id="tree_1" class="tree-demo" style="font-size: 10px;border: 1px solid #dddddd">
+
+                        <ul>
+                            <?php
+                                $nivelUnidadUsuarioSesion = $this->idUnidadNivel;
+                                //$idUnidad = MisLibrerias\DatosSesion::getUnidad();
+                                foreach ($listadoUnidades as $registro){
+                                if($registro['nivel'] == $nivelUnidadUsuarioSesion
+                                    && $this->idUnidad == $registro['id_unidad']
+                                ){ ?>
+                                <li  data-jstree='{ "opened" : true }' title="<?php echo $registro['denominacion']?>">
+                                    <a class="ajaxify"
+                                       id="<?php echo $registro['id_unidad'] ?>"
+                                       data-content = "div_tree_content"
+                                       href="<?php echo $this->url('formulacion/default',
+                                                                   array('controller' => 'index',
+                                                                         'action' => 'lista-items',
+                                                                         'id' => $this->idGp,
+                                                                         'id2' => $registro['id_unidad'],
+                                                                   )); ?>"
+                                       title="<?php echo $registro['denominacion']?>">
+                                        <?php echo $registro['id_unidad'] ."-". substr($registro['denominacion'],0,50) ?>
+                                    </a>
+                                    <ul>
+                                    <?php foreach ($listadoUnidades as $registroN2){
+                                    if($registroN2['nivel'] == $nivelUnidadUsuarioSesion + 1
+                                        && $registro['id_unidad'] == $registroN2['id_unidad_padre']
+                                    ){?>
+                                        <li data-jstree='{ "opened" : true , "icon" : "fa fa-briefcase icon-state-success " }'>
+                                            <a class="ajaxify"
+                                               id="<?php echo $registroN2['id_unidad'] ?>"
+                                               data-content = "div_tree_content"
+                                               href="<?php echo $this->url('formulacion/default',
+                                                                           array('controller' => 'index',
+                                                                                 'action' => 'lista-items',
+                                                                                 'id' => $this->idGp,
+                                                                                 'id2' => $registroN2['id_unidad'],
+                                                                           )); ?>"
+                                               title="<?php echo $registroN2['denominacion']?>">
+                                                <?php echo $registroN2['nivel'] ."-".  $registroN2['id_unidad'] ."-". substr($registroN2['denominacion'],0,40) ?>
+                                            </a>
+                                            <ul style="font-size: 5px;">
+                                                <?php foreach ($listadoUnidades as $registroN3){
+                                                    if($registroN3['nivel'] == $nivelUnidadUsuarioSesion+2
+                                                        && $registroN2['id_unidad'] == $registroN3['id_unidad_padre']
+                                                    ){?>
+                                                        <li data-jstree='{ "icon" : "fa fa-file icon-state-info " }' >
+                                                            <a class="ajaxify"
+                                                               id="<?php echo $registroN3['id_unidad'] ?>"
+                                                               data-content = "div_tree_content"
+                                                               href="<?php echo $this->url('formulacion/default',
+                                                                                           array('controller' => 'index',
+                                                                                                 'action' => 'lista-items',
+                                                                                                 'id' => $this->idGp,
+                                                                                                 'id2' => $registroN3['id_unidad'],
+                                                                                           )); ?>"
+                                                               title="<?php echo $registroN3['denominacion']?>">
+                                                                <?php echo $registroN3['nivel'] ."-". $registroN3['id_unidad'] ."-". substr($registroN3['denominacion'],0,35) ?>
+                                                            </a>
+                                                            <ul style="font-size: 5px;">
+                                                                <?php foreach ($listadoUnidades as $registroN4){
+                                                                    if($registroN4['nivel'] == $nivelUnidadUsuarioSesion+3
+                                                                        && $registroN3['id_unidad'] == $registroN4['id_unidad_padre']
+                                                                    ){?>
+                                                                        <li data-jstree='{ "icon" : "fa fa-file icon-state-info " }' >
+                                                                            <a class="ajaxify"
+                                                                               id="<?php echo $registroN4['id_unidad'] ?>"
+                                                                               data-content = "div_tree_content"
+                                                                               href="<?php echo $this->url('formulacion/default',
+                                                                                                           array('controller' => 'index',
+                                                                                                                 'action' => 'lista-items',
+                                                                                                                 'id' => $this->idGp,
+                                                                                                                 'id2' => $registroN4['id_unidad'],
+                                                                                                           )); ?>"
+                                                                               title="<?php echo $registroN4['denominacion']?>">
+                                                                                <?php echo $registroN4['nivel'] ."-". $registroN4['id_unidad'] ."-". substr($registroN4['denominacion'],0,30) ?>
+                                                                            </a>
+                                                                        </li>
+                                                                    <?php }} ?>
+                                                            </ul>
+                                                        </li>
+                                                    <?php }} ?>
+                                            </ul>
+                                        </li>
+                                    <?php }} ?>
+                                    </ul>
+                                </li>
+                            <?php }} ?>
+                        </ul>
+
+
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div id="div_tree_content"> <p class="label-warning" style="padding: 5px ">
+                            <i class="fa fa-arrow-left"></i> Seleccione una opcion</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+<script>
+    jQuery(document).ready(function() {
+
+        var handleSample1 = function () {
+
+            $('#tree_1').jstree({
+                "core" : {
+                    "themes" : {
+                        "responsive": true
+                    }
+                },
+                "types" : {
+                    "default" : {
+                        "icon" : "fa fa-folder icon-state-warning icon-lg"
+                    },
+                    "file" : {
+                        "icon" : "fa fa-file icon-state-warning icon-lg"
+                    }
+                },
+                "state" : { "key" : "demoUnidades" },
+                "plugins" : [ "state", "types" ]
+            });
+
+            // handle link clicks in tree nodes(support target="_blank" as well)
+            /*$('#tree_1').on('select_node.jstree', function(e,data) {
+                var link = $('#' + data.selected).find('a');
+                if (link.attr("href") != "#" && link.attr("href") != "javascript:;" && link.attr("href") != "") {
+                    if (link.attr("target") == "_blank") {
+                        link.attr("href").target = "_blank";
+                    }
+                    document.location.href = link.attr("href");
+                    return false;
+                }
+            });*/
+        }
+
+        handleSample1();
+        //UITree.init();
+        //$('#' + $.cookie('tree-id-option-selected')).attr('class','jstree-anchor   jstree-clicked');
+        $('#' + $.cookie('tree-id-option-selected')).removeClass('jstree-clicked');
+        $('#' + $.cookie('tree-id-option-selected')).addClass(' jstree-clicked ');
+        console.log($('#' + $.cookie('tree-id-option-selected')).attr('class'));
+    });
+</script>
+
+<script>
+
+    function cambiarPeriodo(idGestionPeriodo) {
+
+       /* if ($.cookie) {
+            $.cookie('tree-id-option-selected', 0);
+        }*/
+
+        //$('#' + $.cookie('tree-id-option-selected')).removeClass('jstree-clicked');
+        //$('.page-content-body').load('/formulacion/index/lista-unidades/'+idGestionPeriodo+'/<?php echo $this->idUnidad ?>');
+        $('#result').load('/formulacion/index/lista-unidades/'+idGestionPeriodo+'/<?php echo $this->idUnidad ?>');
+        //return;
+    }
+
+    $(document).ready(function () {
+        $("#idGestionPeriodo").val(<?php echo $this->idGp ?>);
+
+
+
+       // $.cookie('tree-id-option-selected', null);
+
+
+        $('#tree_1').on('click', 'a', function (e) {
+            $('#' + $.cookie('tree-id-option-selected')).removeClass('jstree-clicked');
+
+
+            var id = $(this).attr("id");
+
+            if ($.cookie) {
+                $.cookie('tree-id-option-selected', id);
+            }
+
+            //$('#' + $.cookie('tree-id-option-selected')).attr('class','jstree-anchor  ajaxify jstree-clicked');
+
+            console.log("idd: "+id);
+
+            $('#' + $.cookie('tree-id-option-selected')).addClass(' jstree-clicked ');
+
+
+        });
+
+        console.log("idd-cookie: "+ $.cookie('tree-id-option-selected'));
+        $('#' + $.cookie('tree-id-option-selected')).trigger('click');
+
+
+
+    });
+
+
+
+
+
+
+
+    function openModal(id,nombreArchivo){
+
+        var url = '/data/'+id+'_parametro.pdf';
+        var html =
+            '<div class="modal-header label-default">' +
+            //'<div class=""><i class="fa fa-windows"></i> PDF</div>' +
+            //'<div class="" style="text-align:right;"><button type="button" data-dismiss="modal" class="btn blue btn-xs"><i class="fa fa-times"></i>   Cerrar </button></div>' +
+            '<button type="button" class="close" data-dismiss="modal"> Cerrar</button>'+
+            '<div class="caption"><i class="fa fa-windows"></i> Vista Previa: '+nombreArchivo+'</div>'+
+            '</div>' +
+            '<div class="modal-body">' +
+            '<iframe src="'+url+'" width="100%" height="450" frameborder=0></iframe>' +
+            '</div>'+
+            '<div class="modal-footer label-default">'+
+            '<button class="btn btn-xs blue" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>'+
+            '</div>';
+        $('.modal-content').html(html);
+
+        $('#modal_nuevo').modal('show');
+
+        //var url = '/data/'+id+'_parametro.pdf';
+        //window.showModalDialog(url,null, "dialogWidth:900px; dialogHeight:500px;dialogLeft:150;dialogTop:50;");
+    }
+
+
+    jQuery(document).ready(function () {
+        var initTable1 = function () {
+
+            var oTable = $('#tbl_parametros');
+
+            var cabeceraImpresion =
+                "<div class='text-left' style='font-size: 1.2em'>" +
+                    "<span><b>MINISTERIO DE ECONOMIA Y FINANZAS PUBLICAS</b></span>" +
+                    "<br><span><?php echo \MisLibrerias\DatosSesion::getAplicacion() ?></span>" +
+                    "<br><span>ADMINISTRACION DE PERIODOS</span>" +
+                    "<br><span>REPORTE AL <?php echo date("d-m-Y")?></span>" +
+                "</div>";
+            var cabeceraImpresionXls =
+                "MINISTERIO DE ECONOMIA Y FINANZAS PUBLICAS" +
+                    "\n<?php echo \MisLibrerias\DatosSesion::getAplicacion() ?>" +
+                    "\nADMINISTRACION DE PERIODOS" +
+                    "\nREPORTE AL <?php echo date("d-m-Y")?>\n";
+
+            // begin first table
+            oTable.dataTable({
+                //dom: 'T<"clear">lfrtip',
+                //dom: 'T<"clear">lfrtip<"clear spacer">T',
+                tableTools: {
+                    "sSwfPath":  "/assets/global/plugins/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+
+                    "aButtons": [
+
+                       // "select",
+                        //"print",
+                        //{
+                        //    "sExtends":    "collection",
+                        //    "sButtonText": "Save",
+                    //    "aButtons":    [ "csv", "xls", "pdf" ]
+                        //},
+
+                        {
+                            "sExtends": "xls",
+                            "sButtonText": "Exportar a Excel",
+                            "sMessage": cabeceraImpresionXls,
+                            "mColumns": "orderable",
+                            "sFileName": "Periodo_<?php echo date('d-m-Y')?>.csv",
+                            "oSelectorOpts": {
+                                page: 'all'
+                            },
+                            "fnClick": function( nButton, oConfig, flash ) {
+                                this.fnSetText( flash,  oConfig.sMessage +"\n"+ this.fnGetTableData(oConfig) );
+                            }
+                        },
+
+                        {
+                            "sExtends":    "print",
+                            "sButtonText": "Imprimir",
+                            "sInfo":  "",
+                            "bShowAll": true,
+                            //"hidden": [true,true,true,false,false],
+                            "sMessage": cabeceraImpresion,
+                            //"mColumns": "orderable",
+                            "fnClick": function( button, conf ) {
+                                this.fnPrint( true, conf);
+                                window.print();
+                                //window.close();
+                                this.fnPrint( false, conf);
+                            }
+                        },
+
+
+
+                    ]
+
+                },
+
+                // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js).
+                // So when dropdowns used the scrollable div should be removed.
+                //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
+
+                 //"bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+                "columns": [
+                  {"visible": true},
+                  {"visible": true},
+                  {"visible": true},
+                  {"visible": true},
+                 ],
+                "lengthMenu": [
+                    [5, 10, 15, 20, -1],
+                    [5, 10, 15, 20, "Todos"] // change per page values here
+                ],
+                // set the initial value
+                "pageLength": 10,
+                "pagingType": "bootstrap_full_number",
+
+                /*"language": {
+                    //url: 'http://cdn.datatables.net/plug-ins/3cfcc339e89/i18n/Spanish.json'
+                   // url: '/assets/global/plugins/datatables/plugins/bootstrap/es_ES.txt'
+                },*/
+
+                "columnDefs": [
+                    { 'orderable': true,'targets': [0]},
+                    { 'orderable': true,'targets': [1]},
+                    { 'orderable': true,'targets': [2]},
+                    { 'orderable': false,'targets': [3]},
+                ],
+
+                /*"order": [
+                    [0, "asc"]
+                ],*/
+                bFilter : true,
+            }).columnFilter({aoColumns:[
+                    null,
+                    null,
+                    { type: "select",sSelector: "#unidadFilter" },
+                    null,
+                ]}
+            );
+
+            var tableWrapper = jQuery('#tbl_parametros_wrapper');
+            tableWrapper.find('.dataTables_length select').select2(); // initialize select2 dropdown
+            jQuery('#tbl_parametros_wrapper .dataTables_filter input').addClass("form-control input-small input-inline"); // modify table search input
+           // jQuery('#filter_global .select_filter').select2();
+           // jQuery('#filter_global .select_filter').addClass("form-control select_filter_custom"); // modify table per page dropdown
+             tableWrapper.find('.dataTables_length select').addClass("form-control input-small input-inline"); // modify table per page dropdown
+
+            $('#tbl_parametros_column_toggler input[type="checkbox"]').change(function(){
+                /* Get the DataTables object again - this is not a recreation, just a get of the object*/
+                var iCol = parseInt($(this).attr("data-column"));
+                var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;
+                oTable.fnSetColumnVis(iCol, (bVis ? false : true));
+            });
+
+
+/*            var tt = new $.fn.dataTable.TableTools( table );
+            $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');*/
+
+        }
+
+        if (!jQuery().dataTable) {
+            return;
+        }
+
+        initTable1();
+    });
+
+
+    jQuery(document).ready(function () {
+
+        $('#tbl_parametros').on('click', '#cambiar_estado', function (e) {
+
+            var pageContentBody = $('.page-content .page-content-body');
+
+            var id = $(this).attr("data-id");
+            var url_callback = jQuery(this).attr("data-url-callback");
+            var url = jQuery(this).attr("data-url");
+            e.preventDefault();
+            Metronic.startPageLoading();
+            $.ajax({
+                url: url,
+                data: {id: id},
+                type: 'GET',
+                async: false,
+                dataType: "json",
+                success: function (data) {
+                    Metronic.stopPageLoading();
+                    if (data.respuesta) {
+                        Metronic.startPageLoading();
+                       //jQuery('.page-content-body').load(url_callback);
+                        //pageContentBody.load(url_callback);
+                        //jQuery('#result').load(url_callback);
+                        jQuery('.page-content .page-content-body').load(url_callback);
+                        Metronic.stopPageLoading();
+                        toastr.success(data.mensaje, 'SUCCESS');
+                    } else {
+                        toastr.error(data.mensaje, 'ERROR');
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    toastr.error('OCURRIÓ UN ERROR AL EJECUTAR LA PAGINA', 'ERROR');
+                    Metronic.stopPageLoading();
+                }
+            });
+
+        });
+
+
+        $('#tbl_parametros').on('click', '#eliminar', function (e) {
+
+            var id = $(this).attr("data-id");
+            var url_callback = jQuery(this).attr("data-url-callback");
+            var url = jQuery(this).attr("data-url");
+            bootbox.setDefaults({
+                locale: "es",
+                title: "Confirmación"
+            });
+            bootbox.confirm("ESTA SEGURO QUE DESEA ELIMINAR EL REGISTRO?", function (result) {
+                if (result) {
+                    e.preventDefault();
+                    Metronic.startPageLoading();
+                    $.ajax({
+                        url: url,
+                        data: {id: id},
+                        type: 'GET',
+                        async: false,
+                        dataType: "json",
+                        success: function (data) {
+                            Metronic.stopPageLoading();
+                            if (data.respuesta) {
+                                Metronic.startPageLoading();
+                                //jQuery('.page-content-body').load(url_callback);
+                                jQuery('.page-content .page-content-body').load(url_callback);
+                                Metronic.stopPageLoading();
+                                toastr.success(data.mensaje, 'SUCCESS');
+                            } else {
+                                toastr.error(data.mensaje, 'ERROR');
+                            }
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            toastr.error('OCURRRIO UN ERROR AL EJECUTAR LA PAGINA', 'ERROR');
+                            Metronic.stopPageLoading();
+                        }
+                    });
+                }
+
+            });
+
+
+        });
+
+
+    });
+
+
+</script>
+
+<style>
+    /*.form-control{
+        height: 2px;
+        padding-bottom: 1px;
+        padding-top: 1px;
+    }*/
+   /*  .select2-container
+     .select2-choice{
+        background-color: #eeeeee;
+         height: 28px;
+         padding-bottom: 5px;
+         padding-top: 0px;
+    }
+    .select_filter_custom{
+        font-size: 10px;
+    }*/
+
+
+</style>
+</div>

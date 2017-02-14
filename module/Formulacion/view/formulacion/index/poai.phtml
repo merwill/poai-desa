@@ -1,0 +1,281 @@
+<!-- BEGIN PAGE CONTENT-->
+<div class="modal-body">
+    <div id="divResultadoPoai">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box blue" id="form_wizard_1">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-gift"></i> Formulacion - <span class="step-title">
+								Paso 1 de 4 </span>
+                        </div>
+
+                        <div class="tools">
+
+                            <!--<button type="button" class="btn btn-sm red"  onclick="volver()"> Volver</button>-->
+                            <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true"> Cerrar</button>-->
+                            <a class="remove" href="javascript:;" data-dismiss="modal" data-original-title=""
+                               title=""> </a>
+                        </div>
+
+                        <div class="actions">
+                            <form class="navbar-header navbar-left" role="form">
+                                <div class="portlet-input input-inline input-xlarge">
+                                    <!--<div class="form-group">-->
+                                    <select class="form-control input-sm" data-toggle="title"
+                                            data-placement="left" title="FUNCIONARIO"
+                                            id="idPersonaCombo" name="idPersonaCombo" onchange="cambiarPersona(this)"
+                                            style="color: ;font-size: 11px;">
+
+                                        <option value="" disabled>--Seleccione una opcion--</option>
+                                        <?php $nro = 0;
+                                        foreach ($this->listaDependientes as $persona) { ?>
+                                            <option value="<?php echo $persona['id_persona'] ?>"
+                                                    data-id="<?php echo $persona['id_poai'] ?>"
+                                                    title="<?php echo trim($persona['persona']) ?>">
+                                                <?php echo trim($persona['persona']) ?>
+                                            </option>
+                                        <?php } ?>
+
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="portlet-body form">
+                        <form role="form"
+                              action="/formulacion/index/poai/<?php echo $this->idGp ?>/<?php echo $this->idPersona ?>/<?php echo $this->idUnidad ?>"
+                              class="form-horizontal" id="submit_form"name="submit_form"  method="POST">
+                            <div class="form-wizard">
+                                <div class="form-body">
+                                    <ul class="nav nav-pills nav-justified steps">
+                                        <li>
+                                            <a href="#tab1" data-toggle="tab" class="step">
+												<span class="number">
+												1 </span>
+                                                <span class="desc">
+												<i class="fa fa-check"></i> Identificación </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#tab2" data-toggle="tab" class="step">
+												<span class="number">
+												2 </span>
+                                                <span class="desc">
+												<i class="fa fa-check"></i> Descripción </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#tab3" data-toggle="tab" class="step active">
+												<span class="number">
+												3 </span>
+                                                <span class="desc">
+												<i class="fa fa-check"></i> Especificación </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#tab4" data-toggle="tab" class="step">
+												<span class="number">
+												4 </span>
+                                                <span class="desc">
+												<i class="fa fa-check"></i> Confirmación </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div id="bar" class="progress progress-striped" role="progressbar"
+                                         style="background-color: #dddddd">
+                                        <div class="progress-bar progress-bar-success">
+                                        </div>
+                                    </div>
+                                    <div class="tab-content">
+                                        <div class="alert alert-danger display-none">
+                                            <button class="close" data-dismiss="alert"></button>
+                                            Usted tiene algunos errores de forma. Por favor, consulte más abajo.
+                                        </div>
+                                        <div class="alert alert-success display-none">
+                                            <button class="close" data-dismiss="alert"></button>
+                                            Su validación del formulario es exitosa!
+                                        </div>
+                                        <div class="tab-pane active" id="tab1">
+                                            <?php echo $this->partial('formulacion/index/partials/uno',
+                                                array(
+                                                    'idGp' => $this->idGp,
+                                                    'idPoai' => $this->idPoai,
+                                                    'puestoPoai' => $this->puestoPoai,
+                                                    'listaRelacionPuestoDepende' => $this->listaRelacionPuestoDepende,
+                                                    'listaRelacionPuestoSupervisa' => $this->listaRelacionPuestoSupervisa,
+                                                    'widgetItemsSupervisa' => $this->widgetItemsSupervisa,
+
+                                                )); ?>
+                                            <?php //echo $this->unoWidget ?>
+                                        </div>
+                                        <div class="tab-pane" id="tab2">
+                                            <?php echo $this->partial('formulacion/index/partials/dos',
+                                                array('normativasGenerales' => $this->normativasGenerales,
+                                                    'normativasEspecificas' => $this->normativasEspecificas,
+                                                    'normativasValores' => $this->normativasValores,
+                                                    'objetivoPuesto' => $this->objetivoPuesto,
+                                                    'widgetFuncionesGenerales' => $this->widgetFuncionesGenerales,
+                                                    'widgetFuncionesEspecificas' => $this->widgetFuncionesEspecificas,
+
+                                                )); ?>
+                                            <?php //echo $this->dosWidget ?>
+                                        </div>
+                                        <div class="tab-pane" id="tab3">
+                                            <?php echo $this->partial('formulacion/index/partials/tres',
+                                                array(
+                                                        'listaCompetencias' => $this->listaCompetencias,
+                                                        'listaCompetenciasSeleccionadas' => $this->listaCompetenciasSeleccionadas
+
+                                                )); ?>
+                                            <?php //echo $this->tresWidget ?>
+                                        </div>
+                                        <div class="tab-pane" id="tab4">
+                                            <?php echo $this->partial('formulacion/index/partials/confirmar', array()); ?>
+                                            <?php //echo $this->confirmarWidget ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <a href="javascript:;" class="btn default button-previous"
+                                               data-control="tab-wiz">
+                                                <i class="m-icon-swapleft"></i> Atras </a>
+                                            <a href="javascript:;" class="btn blue button-next" data-control="tab-wiz">
+                                                Continuar <i class="m-icon-swapright m-icon-white"></i>
+                                            </a>
+                                            <!--<a href="javascript:;" class="btn green button-submit" data-control="tab-wiz">
+                                                Confirmar  <i class="m-icon-swapright m-icon-white"></i>
+                                            </a>-->
+                                            <input type="submit" class="btn green button-submit" data-control="tab-wiz"
+                                                   value="Confirmar"/>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- END PAGE CONTENT-->
+        <!--    <link href="/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="/assets/global/plugins/select2/select2.css"/>
+            <script type="text/javascript" language="javascript" src="/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+        <script type="text/javascript" src="/assets/global/plugins/jquery-validation/js/jquery.validate.js"></script>
+        <script type="text/javascript" src="/assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
+        <script type="text/javascript" src="/assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+        <script type="text/javascript" src="/assets/global/plugins/select2/select2.min.js"></script>
+            <script type="text/javascript" language="javascript" src="/assets/admin/pages/scripts/form-wizard.js"></script>-->
+
+        <!--    <link href="/assets/global/plugins/select2/select2_.css" rel="stylesheet">
+            <script src="/assets/global/plugins/select2/select2_.js"></script>-->
+
+        <script type="text/javascript">
+            var counter = 6;
+            function formatRepo(repo) {
+                console.log('formatRepo');
+                console.log(repo);
+            }
+
+            function formatRepoSelection(repo) {
+                console.log('formatRepoSelection');
+                console.log(repo);
+            }
+
+            jQuery(document).ready(function () {
+
+
+                //escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                // minimumInputLength: 1,
+                //templateResult: formatRepo, // omitted for brevity, see the source of this page
+                //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+                //});
+
+                //$('#idPersonaCombo').onclick(function () {
+                jQuery('#idPersonaComboAux').on('change', function (e) {
+
+                    var idPersona = $(this).val();
+                    var idPoai = $(this).find(':selected').data('id'); //$(this).data('id');
+
+                    console.log(idPersona);
+                    console.log(idPoai);
+
+                });
+
+
+                var idGp = <?php echo $this->idGp ?>;
+                var idUnidad = <?php echo $this->idUnidad ?>;
+
+
+                FormWizard.init(idGp, idUnidad);
+            });
+
+            function actualizar() {
+                //$('.page-content').load('/formulacion/index');
+                //$('#id_actualizar').trigger('click');
+                $('#' + $.cookie('option-menu') + ' a.ajaxify').trigger('click');
+            }
+            function volver() {
+                //$('.page-content .page-content-body').load('/formulacion/index/index');
+                $('.page-content .page-content-body').load('/formulacion/index/lista-items/<?php echo $this->idUnidad ?>');
+            }
+
+            function cambiarPersona(obj) {
+                //$('.modal-content').load('/formulacion/index/poai/<?php echo $this->idGp ?>/'+idPersona+ '/<?php echo $this->idUnidad ?>');
+
+                //return;
+
+                var idPersona = $(obj).val();
+                var idPoai = $(obj).find(':selected').data('id');
+
+                console.log(idPersona);
+                console.log(idPoai);
+
+
+                var url = '/formulacion/index/poai/<?php echo $this->idGp ?>/' + idPersona + '/<?php echo $this->idUnidad ?>/' + idPoai;
+                //var pageContentBody = $('.page-content .page-content-body');
+                var pageContentBody = $('.modal-content');
+                $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: url,
+                    dataType: "html",
+                    success: function (res) {
+
+                        Metronic.stopPageLoading();
+                        pageContentBody.html(res);
+                        Layout.fixContentHeight(); // fix content height
+                        Metronic.initAjax(); // initialize core stuff
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        Metronic.stopPageLoading();
+                        console.log(xhr);
+                        console.log(ajaxOptions);
+                        console.log(thrownError);
+                        pageContentBody.html('<h4>ssCould not load the requested content.</h4>');
+                        //pageContentBody.html(xhr.responseText);
+
+                        //window.location = '/application';
+                        return;
+
+
+                    }
+                });
+
+
+            }
+
+            $(document).ready(function () {
+
+                $("#idPersonaCombo").val(<?php echo $this->idPersona ?>);
+                $("#idPersonaCombo").select2();
+
+            });
+        </script>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * EInformeActividades
+ *
+ * @ORM\Table(name="e_informe_actividades", indexes={@ORM\Index(name="IDX_FE60475BA60AB375", columns={"nro_item"})})
+ * @ORM\Entity
+ */
+class EInformeActividades
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_informe_actividades", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="e_informe_actividades_id_informe_actividades_seq", allocationSize=1, initialValue=1)
+     */
+    private $idInformeActividades;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="boolean", nullable=true)
+     */
+    private $estado;
+
+    /**
+     * @var \Application\Entity\Puesto
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\Puesto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="nro_item", referencedColumnName="nro_item")
+     * })
+     */
+    private $nroItem;
+
+
+}

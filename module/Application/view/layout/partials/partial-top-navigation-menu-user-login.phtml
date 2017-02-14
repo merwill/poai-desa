@@ -1,0 +1,83 @@
+<!-- BEGIN USER LOGIN DROPDOWN -->
+<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+<li class="dropdown dropdown-user">
+    <!-- <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">-->
+    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+       data-close-others="true">
+        <img alt="" class="img-circle" src="/assets/admin/layout/img/avatar.png"/>
+                            <span class="username username-hide-on-mobile">
+                            <?php echo \MisLibrerias\DatosSesion::getNombreUsuario() ?>  </span>
+        <i class="fa fa-angle-down"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-default">
+        <li>
+            <a href="javascript:;">
+                <i class="icon-user"></i>
+                Usuario:
+                <ul><li>
+                        <b><?php echo MisLibrerias\DatosSesion::getNombreUsuario() ?></b>
+                    </li></ul>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <i class="icon-wallet"></i>
+                Entidad:
+                <ul><li>
+                        <b><?php echo MisLibrerias\DatosSesion::getNombreEntidad() ?></b>
+                    </li></ul>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <div><i class="icon-calendar"></i>
+                    Unidad:</div>
+                <ul><li><div style="">
+                            <b><?php echo MisLibrerias\DatosSesion::getNombreUnidad() ?></b></div>
+                    </li></ul>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <i class="icon-envelope-open"></i>
+                Cargo:
+                <ul><li>
+                        <b><?php echo MisLibrerias\DatosSesion::getPuesto() ?></b>
+                    </li></ul>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <i class="icon-rocket"></i>
+                Perfil(es):
+                <br/><b><?php echo MisLibrerias\DatosSesion::getPerfiles() ?></b>
+
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <i class="icon-lock"></i>
+                Unidad Ejecutora:
+                <ul>
+                    <li><b>
+                            [<?php echo MisLibrerias\DatosSesion::getSiglaUnidadEjecutora() ?>
+                            | Nivel: <?php echo  MisLibrerias\DatosSesion::getNivelUnidad();?>
+                            | Unid: <?php echo  MisLibrerias\DatosSesion::getUnidad();?>
+                            ]
+                            <br>
+                            <?php echo MisLibrerias\DatosSesion::getNombreUnidadEjecutora() ?>
+                            &nbsp;&nbsp;
+                        </b>
+                    </li>
+                </ul>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;" style="background-color: rgba(80, 200, 255, 0.29);"
+               onclick="if(confirm('Esta seguro de salir del sistema?')){window.location = '/application/base/logout';}else{return false;}">
+                <i class="icon-key"></i><b>Cerrar Sesión</b>
+            </a>
+        </li>
+    </ul>
+</li>
+<!-- END USER LOGIN DROPDOWN -->

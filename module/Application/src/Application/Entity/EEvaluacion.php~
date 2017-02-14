@@ -1,0 +1,85 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * EEvaluacion
+ *
+ * @ORM\Table(name="e_evaluacion", indexes={@ORM\Index(name="IDX_1D0556B0A60AB375", columns={"nro_item"})})
+ * @ORM\Entity
+ */
+class EEvaluacion
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_evaluacion", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="e_evaluacion_id_evaluacion_seq", allocationSize=1, initialValue=1)
+     */
+    private $idEvaluacion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="boolean", nullable=true)
+     */
+    private $estado;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_reunion", type="datetime", nullable=true)
+     */
+    private $fechaReunion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="puntaje_total_evaluacion", type="integer", nullable=true)
+     */
+    private $puntajeTotalEvaluacion;
+
+    /**
+     * @var \Application\Entity\Puesto
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\Puesto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="nro_item", referencedColumnName="nro_item")
+     * })
+     */
+    private $nroItem;
+
+
+}

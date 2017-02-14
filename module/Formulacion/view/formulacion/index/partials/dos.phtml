@@ -1,0 +1,533 @@
+<div class="tabbable-custom  nav-justified">
+    <ul class="nav nav-tabs nav-justified">
+        <li class="active">
+            <a href="#tab_1_1_1" data-toggle="tab">
+                2.1. Objetivo del Puesto </a>
+        </li>
+        <li>
+            <a href="#tab_1_1_2" data-toggle="tab">
+                2.2. Normas a Cumplir </a>
+        </li>
+        <li>
+            <a href="#tab_1_1_3" data-toggle="tab">
+                2.3. Funciones Generales del Puesto </a>
+        </li>
+        <li>
+            <a href="#tab_1_1_4" data-toggle="tab">
+                2.4 Funciones Especificas del Puesto </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab_1_1_1">
+            <div class="form-group form-sm-line-input">
+                <label class="col-md-3 control-label">Que hace? <span class=""> * </span></label>
+                <div class="col-md-8">
+                    <textarea class="form-control input-sm"  placeholder="Ingrese descripcion..." rows="1" name="id_que_hace" id="id_que_hace"><?php  echo trim($this->objetivoPuesto['objetivo_a']) ?></textarea>
+                </div>
+            </div>
+            <div class="form-group form-sm-line-input">
+                <label class="col-md-3 control-label">De que forma? <span class=""> * </span></label>
+                <div class="col-md-8">
+                    <textarea class="form-control"  placeholder="Ingrese descripcion..." rows="1" name="id_de_que_forma" id="id_de_que_forma"><?php  echo $this->objetivoPuesto['objetivo_b'] ?></textarea>
+                </div>
+            </div>
+            <div class="form-group form-sm-line-input">
+                <label class="col-md-3 control-label">Con que finalidad? <span class=""> * </span></label>
+                <div class="col-md-8">
+                    <textarea class="form-control"  placeholder="Ingrese descripcion..." rows="1" name="id_con_que_finalidad" id="id_con_que_finalidad"><?php  echo $this->objetivoPuesto['objetivo_c'] ?></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="tab_1_1_2">
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="portlet box blue  bordered">
+                        <div class="portlet-title">
+                            <div class="caption font-white-sunglo">
+                                <i class="icon-settings font-white-sunglo"></i>
+                                <span class="caption-subject bold uppercase"> Normas Generalesssss</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body form">
+                            <div class="form-group">
+                                <div class="form-sm-line-input margin-top-15">
+                                    <label class="col-md-1 control-label"> </label>
+                                    <div class="col-md-10">
+                                        <label class="control-label">Seleccione Norma General: </label>
+                                        <select class="form-control" id="form_control_ng_1" name="form_control_ng_1[]" multiple="multiple">
+<!--                                            <option value="">Seleccione Norma General...</option>-->
+                                            <?php foreach($this->normativasGenerales as $normativa) {
+                                                $selected = "selected";
+                                                foreach($this->normativasValores as $normativaValor) {
+                                                    if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                        //&& $normativaValor['orden'] == 1
+                                                    ){
+                                                        $selected = "selected";
+                                                    }
+                                                }
+                                                ?>
+                                                <option value="<?php echo $normativa['id_parametricas'] ?>" <?php echo $selected ?> >
+                                                    <?php  echo $normativa['codigo'].". ".$normativa['descripcion'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group margin-bottom-10 text-right">
+                                <div class="col-md-11">
+                                    <button id="adicionarNormasGenerales" class="btn btn-success btn-sm"
+                                            type="button">
+                                        <i class="fa fa-plus"> Guardar</i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!--<div class="">
+                                <div class="form-group form-sm-line-input margin-top-10">
+                                    <label class="col-md-2 control-label">2. </label>
+                                    <div class="col-md-8">
+                                        <select class="form-control small" id="form_control_ng_2" name="form_control_ng_2">
+                                            <option value="">Seleccione Norma General...</option>
+                                            <?php /*foreach($this->normativasGenerales as $normativa) {
+                                                $selected = "";
+                                                foreach($this->normativasValores as $normativaValor) {
+                                                    if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                        && $normativaValor['orden'] == 2){
+                                                        $selected = "selected";
+                                                    }
+                                                }
+
+                                                */?>
+                                                <option value="<?php /*echo $normativa['id_parametricas'] */?>"
+                                                    <?php /*echo $selected; */?>
+                                                ><?php /* echo $normativa['descripcion'] */?></option>
+                                            <?php /*} */?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="form-group form-sm-line-input margin-top-10">
+                                    <label class="col-md-2 control-label">3. </label>
+                                    <div class="col-md-8">
+                                        <select class="form-control small" id="form_control_ng_3" name="form_control_ng_3">
+                                            <option value="">Seleccione Norma General...</option>
+                                            <?php /*foreach($this->normativasGenerales as $normativa) {
+                                                $selected = "";
+                                                foreach($this->normativasValores as $normativaValor) {
+                                                    if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                        && $normativaValor['orden'] == 3){
+                                                        $selected = "selected";
+                                                    }
+                                                }
+                                                */?>
+                                                <option value="<?php /*echo $normativa['id_parametricas'] */?>"
+                                                    <?php /*echo $selected; */?>
+                                                ><?php /* echo $normativa['descripcion'] */?></option>
+                                            <?php /*} */?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="form-group form-sm-line-input margin-top-10">
+                                    <label class="col-md-2 control-label">4. </label>
+                                    <div class="col-md-8">
+                                        <select class="form-control small" id="form_control_ng_4" name="form_control_ng_4">
+                                            <option value="">Seleccione Norma General...</option>
+                                            <?php /*foreach($this->normativasGenerales as $normativa) {
+                                                $selected = "";
+                                                foreach($this->normativasValores as $normativaValor) {
+                                                    if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                        && $normativaValor['orden'] == 4){
+                                                        $selected = "selected";
+                                                    }
+                                                }
+                                                */?>
+                                                <option value="<?php /*echo $normativa['id_parametricas'] */?>"
+                                                    <?php /*echo $selected; */?>
+                                                ><?php /* echo $normativa['descripcion'] */?></option>
+                                            <?php /*} */?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="form-group margin-bottom-10 ">
+                                    <label class="col-md-2 control-label">5. </label>
+                                    <div class="col-md-8">
+                                        <select class="form-control small" id="form_control_ng_5" name="form_control_ng_5">
+                                            <option value="">Seleccione Norma General...</option>
+                                            <?php /*foreach($this->normativasGenerales as $normativa) {
+                                                $selected = "";
+                                                foreach($this->normativasValores as $normativaValor) {
+                                                    if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                        && $normativaValor['orden'] == 5){
+                                                        $selected = "selected";
+                                                    }
+                                                }
+                                                */?>
+                                                <option value="<?php /*echo $normativa['id_parametricas'] */?>"
+                                                    <?php /*echo $selected; */?>
+                                                ><?php /* echo $normativa['descripcion'] */?></option>
+                                            <?php /*} */?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="form-group margin-bottom-10 "></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div class="portlet box blue  bordered">
+                        <div class="portlet-title">
+                            <div class="caption font-white-sunglo">
+                                <i class="icon-settings font-white-sunglo"></i>
+                                <span class="caption-subject bold uppercase"> Normas Especificas</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body form" id="div_ne">
+                            <div class="form-group">
+                                <div class="form-sm-line-input margin-top-15">
+                                    <label class="col-md-1 control-label"> </label>
+                                    <div class="col-md-10">
+                                        <label class="control-label">Seleccione Norma Especifica: </label>
+                                        <select class="form-control" id="form_control_ne_1" name="form_control_ne_1[]" multiple="multiple"
+                                       >
+<!--                                            <option value="">Seleccione Normativa Especifica...</option>-->
+                                            <?php
+                                            foreach($this->normativasEspecificas as $normativa) {
+                                                $selected = "";
+                                                foreach($this->normativasValores as $normativaValor) {
+                                                    if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                        //&& $normativaValor['orden'] == 1
+                                                    ){
+                                                        $selected = "selected";
+                                                    }
+                                                }
+                                                ?>
+                                                <option value="<?php echo $normativa['id_parametricas'] ?>" <?php  echo $selected ?> >
+                                                    <?php  echo  $normativa['codigo'].". ".$normativa['descripcion'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group margin-bottom-10 text-right">
+                                <div class="col-md-11">
+                                    <button id="adicionarNormasEspecificas" class="btn btn-warning btn-sm"
+                                            type="button">
+                                        <i class="fa fa-plus"> Adicionar</i>
+                                    </button>
+
+                                    <button id="guardarNormasEspecificas" class="btn btn-success btn-sm"
+                                            type="button">
+                                        <i class="fa fa-save"> Guardar</i>
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <!--<div class="form-group  margin-top-10" id="line2">
+                                <div class="form-md-line-input">
+                                    <label class="col-md-2 control-label">2. </label>
+                                    <div class="col-md-8">
+                                        <select class="form-control small" id="form_control_ne_2" name="form_control_ne_2">
+                                            <option value="">Seleccione Normativa Especifica...</option>
+                                            <?php /*foreach($this->normativasEspecificas as $normativa) {
+                                                $selected = "";
+                                                foreach($this->normativasValores as $normativaValor) {
+                                                    if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                        && $normativaValor['orden'] == 2){
+                                                        $selected = "selected";
+                                                    }
+                                                }
+                                                */?>
+                                                <option value="<?php /*echo $normativa['id_parametricas'] */?>" <?php /* echo $selected */?> >
+                                                    <?php /* echo $normativa['descripcion'] */?></option>
+                                            <?php /*} */?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group  margin-top-10" id="line3">
+                                <div class="form-md-line-input">
+                                    <label class="col-md-2 control-label">3. </label>
+                                    <div class="col-md-8">
+                                        <select class="form-control small" id="form_control_ne_3" name="form_control_ne_3">
+                                            <option value="">Seleccione Normativa Especifica...</option>
+                                            <?php /*foreach($this->normativasEspecificas as $normativa) {
+                                                $selected = "";
+                                                foreach($this->normativasValores as $normativaValor) {
+                                                    if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                        && $normativaValor['orden'] == 3){
+                                                        $selected = "selected";
+                                                    }
+                                                }
+                                                */?>
+                                                <option value="<?php /*echo $normativa['id_parametricas'] */?>" <?php /* echo $selected */?> >
+                                                    <?php /* echo $normativa['descripcion'] */?></option>
+                                            <?php /*} */?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group margin-top-10" id="line4">
+                                <div class="form-md-line-input">
+                                    <label class="col-md-2 control-label">4. </label>
+                                    <div class="col-md-8">
+                                        <select class="form-control small" id="form_control_ne_4" name="form_control_ne_4">
+                                            <option value="">Seleccione Normativa Especifica...</option>
+                                            <?php /*foreach($this->normativasEspecificas as $normativa) {
+                                                $selected = "";
+                                                foreach($this->normativasValores as $normativaValor) {
+                                                    if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                        && $normativaValor['orden'] == 4){
+                                                        $selected = "selected";
+                                                    }
+                                                }
+                                                */?>
+                                                <option value="<?php /*echo $normativa['id_parametricas'] */?>" <?php /* echo $selected */?> >
+                                                    <?php /* echo $normativa['descripcion'] */?></option>
+                                            <?php /*} */?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group margin-top-10" id="line5">
+                                <div class="form-md-line-input">
+                                    <label class="col-md-2 control-label">5. </label>
+                                    <div class="col-md-8">
+                                        <select class="form-control small" id="form_control_ne_5" name="form_control_ne_5">
+                                            <option value="">Seleccione Normativa Especifica...</option>
+                                            <?php /*foreach($this->normativasEspecificas as $normativa) {
+                                                $selected = "";
+                                                foreach($this->normativasValores as $normativaValor) {
+                                                    if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                        && $normativaValor['orden'] == 5){
+                                                        $selected = "selected";
+                                                    }
+                                                }
+                                                */?>
+                                                <option value="<?php /*echo $normativa['id_parametricas'] */?>" <?php /* echo $selected */?> >
+                                                    <?php /* echo $normativa['descripcion'] */?></option>
+                                            <?php /*} */?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>-->
+
+                            <div class="form-group margin-top-0" id="lineSpace"></div>
+                        </div>
+                        <div class="form-group margin-bottom-10 text-right">
+                            <div class="col-md-11">
+                                <button id="addButton" class="btn btn-primary btn-sm" type="button">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                                <button id="removeButton" class="btn btn-danger btn-sm" type="button">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="tab_1_1_3">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-5">
+                    <div class="col-md-12" >
+                        <div class="form-group form-sm-line-input">
+                            <label class="control-label">Ingrese Función General: </label>
+                            <!--  <input type="text" class="form-control" id="funcionGeneral" name="funcionGeneral"> -->
+                            <textarea class="form-control" rows="2" cols="" maxlength="255" id="funcionGeneral"  name="funcionGeneral"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label">Seleccione Especificacion: </label>
+                        <input type="checkbox" checked="" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <label class="control-label">&nbsp;</label><br>
+                    <button id="adicionarFuncionGeneral" class="btn btn-success btn-sm" title="Adicionar"
+                            type="button">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                    <span class="help-block"></span>
+                </div>
+
+                <div id="divTablaFuncionesGenerales">
+                    <?php echo $this->widgetFuncionesGenerales; ?>
+                </div>
+            </div>
+
+        </div>
+        <div class="tab-pane" id="tab_1_1_4">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-5">
+                    <div class="col-md-12" >
+                        <div class="form-group form-sm-line-input">
+                            <label class="control-label">Ingrese Función Específica: </label>
+<!--                            <input type="text" class="form-control" id="funcionEspecifica"  name="funcionEspecifica">-->
+                            <textarea class="form-control" rows="2" cols="" maxlength="255" id="funcionEspecifica"  name="funcionEspecifica"></textarea>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label">Seleccione Especificacion: </label>
+                        <input type="checkbox" checked="" class="make-switch" data-on-text="Recurrente" data-off-text="Producto" data-on-color="success" data-off-color="warning" >
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <label class="control-label">&nbsp;</label><br>
+                    <button id="adicionarFuncionEspecifica" class="btn btn-success btn-sm" title="Adicionar"
+                            type="button">
+                        <i class="fa fa-plus"></i>
+                    </button>
+<!--                    <span class="help-block">123</span>-->
+                </div>
+            </div>
+            <div id="divTablaFuncionesEspecificas">
+                <?php echo $this->widgetFuncionesEspecificas; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+
+        counter = 6;
+
+        $("#addButton").click(function () {
+
+            if (counter > 15) {
+                alert("Esta acci&oacute;n no se permite!");
+                return false;
+            }
+            $("#lineSpace").remove();
+
+            var html =
+                '<div class="form-group margin-top-10" id="line' + counter + '">' +
+                '    <div class="form-md-line-input">' +
+                '        <label class="col-md-2 control-label">' + counter + '. </label>' +
+                '        <div class="col-md-8">' +
+                '        <select class="form-control small" id="form_control_ne_' + counter + '" name="form_control_ne_' + counter + '">' +
+                '            <option value="">Seleccione Normativa Especifica...</option>' +
+                '                  <?php $selected = "0"; $selectedValue = ""?>' +
+                '                <?php foreach($this->normativasEspecificas as $normativa) {?>' +
+                '                  <?php      foreach($this->normativasValores as $normativaValor) {?>' +
+                '                   <?php         if($normativa["id_parametricas"] == $normativaValor["id_normas_p"]){ ?>' +
+                '                   <?php                 $selected = $normativaValor["orden"]; $selectedValue = $normativa["id_parametricas"]   ?>' +
+                '                   <?php         }?>' +
+                '                   <?php     }?>' +
+                '                         <option value="<?php echo $normativa["id_parametricas"] ?>" <?php // echo $selected ?> >' +
+                '                        <?php  echo $normativa["descripcion"] ?></option>' +
+                '                <?php } ?>' +
+                '        </select>' +
+                '        </div>' +
+                '        <div class="col-md-2">' +
+                '           <button id="removeButtonAux" class="removeButtonAux btn btn-danger btn-sm" type="button" onclick="buttonRemoveFila(' + counter + ')">' +
+                '           <i class="fa fa-minus"></i>' +
+                '           </button>' +
+                '        </div>' +
+                '   </div> ' +
+                '</div>' +
+                '<div class="form-group margin-top-0" id="lineSpace"></div>';
+
+            $("#div_ne").append(html);
+            <?php //echo $selected ?>
+            if (counter == <?php  echo $selected ?>) {
+                $("#form_control_ne_" + counter).val(<?php  echo $selectedValue ?>);
+            }
+
+            counter++;
+            console.log(counter);
+
+        });
+
+        $("#removeButton").click(function () {
+            if (counter == 6) {
+                alert("Esta acci&oacute;n no se permite!");
+                return false;
+            }
+
+            counter--;
+
+            $("#line" + counter).remove();
+        });
+    //}
+
+    });
+
+
+    function buttonRemoveFila(counter){
+        //alert(counter);
+        $("#line" + counter).remove();
+    }
+
+    function formatRepoSelection (repo) {
+        console.log(repo.text);
+        return repo.text+"<hr>"; //repo.text || repo.unidad;
+    }
+    function formatRepo (repo) {
+        console.log(repo.text);
+        return repo.text+"\n"; //repo.text || repo.unidad;
+    }
+
+    $(document).ready(function () {
+
+        $("#form_control_ng_1").select2({
+            placeholder: "Seleccionar ...",
+            allowClear: true,
+            theme: "classic",
+            language: "es",
+           // tags: true,
+           // tokenSeparators: [',', ' ']
+        });
+
+        $("#form_control_ne_1").select2({
+            //tags: true,
+            placeholder: "Seleccionar Norma Especifica...",
+            //tokenSeparators: [',', '<br>'],
+           // allowClear: true,
+            //width: "auto",
+            //theme: "classic",
+            language: "es",
+            //formatResult: formatRepoSelection,
+           // templateResult: formatRepo
+        });
+
+
+
+
+        //$("#form_control_ne_1").select2('positionDropdown');
+
+    });
+
+
+</script>
+
+
+
+
+
+
+
+
+
+

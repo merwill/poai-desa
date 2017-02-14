@@ -1,0 +1,85 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * FFormaciones
+ *
+ * @ORM\Table(name="f_formaciones", indexes={@ORM\Index(name="IDX_25B24A41CA586C85", columns={"id_poai"})})
+ * @ORM\Entity
+ */
+class FFormaciones
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_formacion", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="f_formaciones_id_formacion_seq", allocationSize=1, initialValue=1)
+     */
+    private $idFormacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="area_formacion", type="string", length=225, nullable=true)
+     */
+    private $areaFormacion;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="boolean", nullable=true)
+     */
+    private $estado;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_grados_formaciones_p", type="integer", nullable=true)
+     */
+    private $idGradosFormacionesP;
+
+    /**
+     * @var \Application\Entity\FPoai
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\FPoai")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_poai", referencedColumnName="id_poai")
+     * })
+     */
+    private $idPoai;
+
+
+}

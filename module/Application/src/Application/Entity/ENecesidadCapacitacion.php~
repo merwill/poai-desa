@@ -1,0 +1,85 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ENecesidadCapacitacion
+ *
+ * @ORM\Table(name="e_necesidad_capacitacion", indexes={@ORM\Index(name="IDX_EE871570642D436A", columns={"id_informe_actividades"})})
+ * @ORM\Entity
+ */
+class ENecesidadCapacitacion
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_necesidad", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="e_necesidad_capacitacion_id_necesidad_seq", allocationSize=1, initialValue=1)
+     */
+    private $idNecesidad;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="funciones", type="string", length=100, nullable=true)
+     */
+    private $funciones;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="denominacion_tema", type="string", length=225, nullable=true)
+     */
+    private $denominacionTema;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="profundidad", type="string", length=50, nullable=true)
+     */
+    private $profundidad;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var \Application\Entity\EInformeActividades
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\EInformeActividades")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_informe_actividades", referencedColumnName="id_informe_actividades")
+     * })
+     */
+    private $idInformeActividades;
+
+
+}

@@ -1,0 +1,180 @@
+<div style="background: #eee">
+<!--<div class="col-md-12">
+    <h5><b>III. ESPECIFICACIÓN </b></h5>
+</div>-->
+<div class="form-group">
+    <label class="control-label col-md-3 text-left">3.1. FORMACIÓN  * </label>
+    <div class="col-md-8">
+        <input type="text" class="form-control" name="formacion" id="formacion"/><span class="help-block"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3">3.2. EXPERIENCIA <span class=""> * </span></label>
+    <div class="col-md-8">
+        <input type="text" class="form-control" name="experiencia" id="experiencia"/><span class="help-block"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3">3.3. REGISTRO PROFESIONAL <span class=""></span></label>
+    <div class="col-md-8">
+        <input type="text" class="form-control" name="registro_profesional" id="registro_profesional"
+        placeholder="(Cuando el puesto asi lo requiera)"/><span class="help-block"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3" title="(Información a ser llenada con base a las funciones del puesto)">3.4. COMPETENCIAS</label>
+    <div class="col-md-8">
+            <select class="form-control" id="combo_competencia" name="combo_competencia[]" multiple="multiple">
+<!--                <option value="">Seleccione Competencia...</option>-->
+                <?php
+                foreach ($this->listaCompetencias as $competencia) {
+                    $selected = "";
+                    foreach ($this->listaCompetenciasSeleccionadas as $competenciasSeleccionada) {
+                        if($competencia['id_parametricas'] == $competenciasSeleccionada['id_competencia_p']){
+                            $selected = "selected";
+                            continue;
+                        }
+                    }
+
+                    ?>
+                    <optgroup label="<?php echo $competencia['codigo'] ?>">
+                        <option value="<?php echo $competencia['id_parametricas'] ?>"
+                            title="<?php echo "[".$competencia['codigo'] ."] ".$competencia['descripcion'] ?>"
+                            <?php echo $selected ?>>
+                            <?php echo "[".strtoupper($competencia['codigo']) ."] ".$competencia['descripcion'] ?>
+                        </option>
+                    </optgroup>
+                <?php } ?>
+            </select>
+
+    </div>
+    <div class="col-md-1">
+        <button id="adicionarItemCompetencia" class="btn btn-success btn-sm"
+                type="button">
+            <i class="fa fa-save"></i>
+        </button>
+        <span class="help-block"></span>
+    </div>
+</div>
+<!--<div class="form-group">
+    <label class="control-label col-md-3">&nbsp;</label>
+    <div class="col-md-8">
+        <table class="table  table-hover table-bordered  table-condensed"
+               id="tbl_items_competencia" style="font-size: 10px;" width="100%">
+            <thead>
+            <tr style="color: Menu; background-color: #3799dc;">
+                <th class="text-center" style="width: 10%;">N°</th>
+                <th class="text-center" style="width: 80%;">Competencias</th>
+                <th class="text-center" style="width: 10%;">Acción</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>-->
+<div class="form-group">
+    <label class="control-label col-md-3"
+            title="Técnicos, Herramientas Ofimáticas, Idiomas; en los dos últimos especificar el nivel: Básico, Medio o Avanzado">
+        3.5. CONOCIMIENTOS REQUERIDOS</label>
+    <div class="col-md-5">
+        <input type="text" class="form-control" name="conocimiento_requerido" id="conocimiento_requerido"/><span class="help-block"></span>
+    </div>
+    <div class="col-md-3">
+        <input type="checkbox" class="make-switch" data-on-text="Escencial" data-off-text="Complementario" data-on-color="success" data-off-color="warning" >
+    </div>
+    <div class="col-md-1">
+        <button id="adicionarItemCompetencia" class="btn btn-success btn-sm"
+                type="button">
+            <i class="fa fa-plus"></i>
+        </button>
+        <span class="help-block"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3">&nbsp;</label>
+    <div class="col-md-8">
+        <table class="table  table-hover table-bordered  table-condensed"
+               id="tbl_items_conocimientos_req" style="font-size: 10px;" width="100%">
+            <thead>
+            <tr style="color: Menu; background-color: #3799dc;">
+                <th class="text-center" style="width: 10%;">N°</th>
+                <th class="text-center" style="width: 60%;">Descripcion</th>
+                <th class="text-center" style="width: 20%;">Tipo</th>
+                <th class="text-center" style="width: 10%;">Acción</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="form-group">
+    <label class="control-label col-md-3">3.6. REQUISITOS CONSTITUCIONALES</label>
+    <div class="col-md-5">
+        <input type="text" class="form-control" name="requisito_constitucional" id="requisito_constitucional"/><span class="help-block"></span>
+    </div>
+    <div class="col-md-3">
+        <input type="checkbox" class="make-switch" data-on-text="Escencial" data-off-text="Complementario" data-on-color="success" data-off-color="warning" >
+    </div>
+    <div class="col-md-1">
+        <button id="adicionarItemCompetencia" class="btn btn-success btn-sm"
+                type="button">
+            <i class="fa fa-plus"></i>
+        </button>
+        <span class="help-block"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-3">&nbsp;</label>
+    <div class="col-md-8">
+        <table class="table  table-hover table-bordered  table-condensed"
+               id="tbl_items_req_constitucionales" style="font-size: 10px;" width="100%">
+            <thead>
+            <tr style="color: Menu; background-color: #3799dc;">
+                <th class="text-center" style="width: 10%;">N°</th>
+                <th class="text-center" style="width: 60%;">Descripcion</th>
+                <th class="text-center" style="width: 20%;">Tipo</th>
+                <th class="text-center" style="width: 10%;">Acción</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+
+<link href="/assets/global/plugins/select2/select2_.css" rel="stylesheet">
+<script src="/assets/global/plugins/select2/select2_.js"></script>
+<script type="text/javascript">
+
+    function formatRepoSelection (repo) {
+        console.log(repo);
+        //return ""; //repo.text || repo.unidad;
+    }
+
+    $(document).ready(function () {
+
+        //$("#idPersonaCombo").val(<?php //echo $this->idPersona ?>);
+        $("#combo_competencia").select2({
+            placeholder: "Seleccionar competencias",
+            allowClear: true,
+            theme: "classic",
+            language: "es",
+
+            //escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            //minimumInputLength: 1,
+            //templateResult: formatRepo, // omitted for brevity, see the source of this page
+            //templateSelection: formatRepoSelection
+        });
+
+    });
+
+    </script>

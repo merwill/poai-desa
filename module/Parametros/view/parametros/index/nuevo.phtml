@@ -1,0 +1,205 @@
+<div class="modal-header  label-default">
+ 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+	<div><i class="fa fa-windows"></i> Base de Datos - Nuevo Registro</div>
+ </div>
+
+<?php
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('parametros/default', array('controller' => 'index', 'action' => 'nuevo')));
+$form->prepare();
+?>
+<?php echo $this->form()->openTag($form); ?>
+<div class="modal-body">
+
+          <?php echo $this->formInput($form->get('idParametro'));?>
+            <div class="row">
+                <label class="col-lg-3 control-label"><?php echo $this->formLabel($form->get('idPadreParametro')); ?></label>
+                <div class="col-lg-9"><?php echo $this->formText($form->get('idPadreParametro'));?></div>
+            </div>
+            <div class="row">
+                <label class="col-sm-3 control-label"><?php echo $this->formLabel($form->get('sigla')); ?></label>
+                <div class="col-sm-9"><?php echo $this->formText($form->get('sigla'));?></div>
+            </div>
+            <div class="row">
+                <label class="col-sm-3 control-label"><?php echo $this->formLabel($form->get('descripcion')); ?></label>
+                <div class="col-sm-9"><?php echo $this->formText($form->get('descripcion'));?></div>
+            </div>
+            <div class="row">
+                <label class="col-sm-3 control-label"><?php echo $this->formLabel($form->get('orden')); ?></label>
+                <div class="col-sm-9"><?php echo $this->formText($form->get('orden'));?></div>
+            </div>
+
+            <div class="row">
+                <label class="col-sm-3 control-label"><?php echo $this->formLabel($form->get('nivel')); ?></label>
+                <div class="col-sm-9"><?php echo $this->formText($form->get('nivel'));?></div>
+            </div>
+            <div class="row">
+                <label class="col-sm-3 control-label"><?php echo $this->formLabel($form->get('archivo_adjunto')); ?></label>
+                <div class="col-sm-9"><?php echo $this->formFile($form->get('archivo_adjunto'));?></div>
+            </div>
+            <div class="row">
+                <label class="col-sm-3 control-label"><?php echo $this->formLabel($form->get('estado')); ?></label>
+                <div class="col-sm-9"><?php echo $this->formElement($form->get('estado'));?></div>
+            </div>
+
+
+
+</div>
+<div class="modal-footer label-default">
+    <?php echo $this->formElement($form->get('Registrar'))?>
+    <button type="button" class="btn default btn-xs" data-dismiss="modal"><?php echo  $this->idParametro=='0'?'Cancelar':'Cerrar'?></button>
+</div>
+<?php echo $this->form()->closeTag($form); ?>
+<!-- END PAGE LEVEL STYLES -->
+<script>
+
+jQuery(document).ready(function() {
+	handleFormBases();
+	
+});
+
+                    
+function handleFormBases() {
+    var form1 = $('#frmParametro');
+    var error1 = $('.alert-danger', form1);
+    var success1 = $('.alert-success', form1);
+
+    
+    form1.validate({
+        errorElement: 'span', //default input error message container
+        errorClass: 'help-block', // default input error message class
+        focusInvalid: false, // do not focus the last invalid input
+      ///  ignore: "",
+        rules: {
+            idPadreParametro: {
+        		required:true,
+            },
+            sigla: {
+        		required:true,
+            },
+            descripcion: {
+            	required:true,
+            },
+            orden: {
+        		required:true,
+            },
+            nivel: {
+            	required: true,
+            },
+            estado: {
+        		required:true,
+            },            
+        },
+        messages: { // custom messages for radio buttons and checkboxes
+            idPadreParametro: {
+                required: "Debe registrar Código de la Base de Datos",
+           },
+            sigla: {
+                required: "Debe registrar Nombre de la Base de Datos",
+           },
+            descripcion: {
+               required: "Debe registrar Host de la Base de Datos",
+          },
+            orden: {
+                required: "Debe registrar el puerto de la Base de Datos",
+           },
+            nivel: {
+                required: "Debe registrar usuario de la Base de Datos",
+           },
+            estado: {
+                required: "Debe registrar password de la Base de Datos",
+           },
+        },
+
+        invalidHandler: function (event, validator) { //display error alert on form submit              
+            success1.hide();
+            error1.show();
+            Metronic.scrollTo(error1, -200);
+        },
+
+        highlight: function (element) { // hightlight error inputs
+            $(element)
+                .closest('.row').addClass('has-error'); // set error class to the control group
+        },
+
+        unhighlight: function (element) { // revert the change done by hightlight
+            $(element)
+                .closest('.row').removeClass('has-error'); // set error class to the control group
+        },
+
+        success: function (label) {
+            label
+                .closest('.row').removeClass('has-error'); // set success class to the control group
+        },
+
+        submitHandler: function (form) {
+        	ajaxEnviar(form,'parametros/index/index','#result');
+        }
+    });
+
+} 
+    function ajaxEnviar (form,url,div) {
+
+       var vsl_mensaje = "";
+
+        var formData = new FormData(form);
+
+       if ($('#idParametro').val() == '0'){
+         vsl_mensaje = "ESTA SEGURO DE GUARDAR EL REGISTRO?";
+       }else{
+         vsl_mensaje = "ESTA SEGURO DE ACTUALIZAR EL REGISTRO?";
+           }
+
+
+
+        bootbox.setDefaults({
+            locale: "es",
+            //title: "Confirmación"
+        });
+        bootbox.confirm(vsl_mensaje, function(result) {
+            if(result){
+
+                $('#modal_nuevo').modal('hide');
+
+                Metronic.startPageLoading();
+                $.ajax({
+                    type: $(form).attr('method'),
+                    url: $(form).attr('action'),
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    //data: $(form).serialize(),
+                    data: formData,
+                    mimeType:"multipart/form-data",
+                    dataType: "json",
+                    success: function (data) {
+                        if(data.respuesta){
+                            //$('#modal_nuevo').show();
+                            //jQuery(div).load(url);
+                            //jQuery('.page-content .page-content-body').load(url);
+                            jQuery('#result').load(url);
+
+                            toastr.success(data.mensaje, 'SUCCESS');
+                            Metronic.stopPageLoading();
+
+                        }else{
+                            //$('#modal_nuevo').modal().show();
+                            toastr.error(data.mensaje, 'ERROR');
+                            Metronic.stopPageLoading();
+                        }
+                    },
+                    error : function(jqXHR, status, error) {
+                        toastr.error('OCURRRIO UN ERROR AL EJECUTAR LA PAGINA', 'ERROR');
+                        Metronic.stopPageLoading();
+                    }
+                });
+            }
+        });
+    }
+    
+
+                    
+
+</script>
+

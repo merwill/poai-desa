@@ -1,0 +1,485 @@
+<div id="result">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- <h3 class="page-title">
+                 Configuracion -
+                 <small>Administración de Parametros</small>
+             </h3>-->
+
+
+            <div class="">
+                <h3 class="title">
+                    <b>Administración de Gestion/Periodos</b>
+                </h3>
+            </div>
+
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+
+                    </div>
+
+                    <!-- BEGIN BOTON NUEVO -->
+                    <div class="actions">
+                        <div class="btn-group btn-group-xs">
+                            <a href="<?php echo $this->url('administracion/default', array('controller' => 'gestion', 'action' => 'nuevo','id' => '0')); ?>"
+                               data-target="#modal_nuevo"
+                               data-toggle="modal"
+                               class="btn btn-info yellow">
+                                <i class="fa fa-file-text"></i> Nuevo Gestion/Periodo
+                            </a>
+                            <button class="btn green" onclick="actualizarTabla()">
+                                <i class="fa fa-refresh"></i> Actualizar
+                            </button>
+
+                            <a class="btn btn-primary" href="#" data-toggle="dropdown">
+                                Columnas <i class="fa fa-angle-down"></i>
+                            </a>
+                            <div id="tbl_periodos_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
+                                <label><input type="checkbox" checked data-column="0"> Nro</label>
+                                <label><input type="checkbox" checked data-column="1"> Descripcion</label>
+                                <label><input type="checkbox" checked data-column="2"> Periodo</label>
+                                <label><input type="checkbox" checked data-column="3"> Fechas</label>
+                                <label><input type="checkbox" checked data-column="4"> Estado</label>
+                                <label><input type="checkbox" checked data-column="5"> Vigencia</label>
+                                <label><input type="checkbox" checked data-column="6"> Acciones</label>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END BOTON NUEVO -->
+                    <br>
+                    <br>
+                    <br>
+                    <div class="row" style="font-size: 12px">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-10">
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr id="filter_global">
+                                    <td style="margin: 0px;" align="left">BUSCAR:</td>
+                                    <td style="margin: 0px;" align="right">Por Periodo</td>
+                                    <td style="padding: 0px;" align="left" id="gestionFilter"></td>
+                                    <td style="margin: 0px;" align="right">Por Estado</td>
+                                    <td style="padding: 0px;" align="left" id="miEstadoFilter"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="portlet-body">
+
+                    <!--  INICIO DE TABLA DE BASES DE DATOS-->
+                    <table class="table  table-hover table-bordered  table-condensed"
+                           id="tbl_periodos" style="font-size: 10px;" width="100%">
+                        <thead>
+                        <tr style="color: Menu; background-color: #3799dc;">
+                            <th class="text-center" style="width: 5%;">Nro</th>
+                            <th class="text-center" style="width: 40%;">Descripcion</th>
+                            <th class="text-center" style="width: 10%;">Periodo</th>
+                            <th class="text-center" style="width: 15%;">Fechas</th>
+                            <th class="text-center" style="width: 10%;">Estado</th>
+                            <th class="text-center" style="width: 10%;">Vigencia</th>
+                            <th class="text-center" style="width: 10%;">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr style="background-color: #3799dc; display: none">
+                            <th class="text-center">Nro</th>
+                            <th class="text-center">Descripcion</th>
+                            <th class="text-center">--TODOS--</th>
+                            <th class="text-center">Fechas</th>
+                            <th class="text-center">--TODOS--</th>
+                            <th class="text-center">Vigencia</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        <?php foreach ($listadoDatos as $registro): ?>
+                            <tr>
+                                <td class="text-center">
+                                    <input type="hidden" name="bd_id" id="bd_id"
+                                           value="<?php echo $registro['id_gp']; ?>">
+                                    <?php echo $registro['id_gp'] ?>
+                                </td>
+                                <td class="text-left"><?php echo $registro['descripcion'] ?></td>
+                                <td  class="text-center"><?php echo $registro['periodo']."/".$registro['gestion'] ?></td>
+                                <td  class="text-center">
+                                    <?php echo MisLibrerias\Fecha::formatFechaDMY($registro['fecha_ini'])." AL ".MisLibrerias\Fecha::formatFechaDMY($registro['fecha_fin']) ?>
+                                </td>
+                                <td class="text-center">
+                                    <?php //echo ($registro['estado']); ?>
+                                    <button  class="btn btn-xs <?php echo MisLibrerias\DatosSesion::getEstadoColorLabel($registro['estado']); ?>"
+                                       style="font-size: 10px;">
+                                        <?php echo  MisLibrerias\DatosSesion::getEstadoDescripcion($registro['estado']);?>
+                                    </button>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-xs <?php echo MisLibrerias\DatosSesion::getVigenciaColorLabel($registro['vigencia']); ?>"
+                                       id="cambiar_vigencia"
+                                       data-url="<?php echo $this->url(
+                                           'administracion/default', array(
+                                                                       'controller' => 'gestion', 'action' => 'cambiar-vigencia'
+                                                                   )
+                                       ); ?>"
+                                       data-toggle="otro"
+                                       data-id="<?php echo $registro['id_gp']; ?>"
+                                       data-url-callback="<?php echo $this->url(
+                                           'administracion/default', array(
+                                                                       'controller' => 'gestion', 'action' => 'index'
+                                                                   )
+                                       ); ?>"
+                                       style="font-size: 10px;">
+                                        <?php echo  MisLibrerias\DatosSesion::getVigenciaDescripcion($registro['vigencia']);?>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="<?php echo $this->url('administracion/default', array('controller' => 'gestion', 'action' => 'nuevo', 'id' => $registro['id_gp'])); ?>"
+                                       data-target="#modal_nuevo" data-toggle="modal" class="btn btn-xs blue"
+                                       title="'EDITAR'" style="font-size: 10px;">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+
+                                    <!--<a href="#" class="btn btn-xs red" id="eliminar" title="ELIMINAR"
+                                       data-url="<?php /*echo $this->url(
+                                           'administracion/default', array(
+                                           'controller' => 'index', 'action' => 'eliminar'
+                                       )
+                                       ); */?>"
+                                       data-toggle="otro"
+                                       data-id="<?php /*echo $registro['id_gp']; */?>"
+                                       data-url-callback="<?php /*echo $this->url(
+                                           'administracion/default', array(
+                                           'controller' => 'index', 'action' => 'index'
+                                       )
+                                       ); */?>"
+                                       style="font-size: 10px;">
+                                        <i class="fa fa-times-circle"></i>
+                                    </a>-->
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                    <!-- FIN DE TABLA DE BASES DE DATO-->
+
+
+                </div>
+            </div>
+            <!-- END EXAMPLE TABLE PORTLET-->
+        </div>
+
+    </div>
+    <!--  BEGIN CONTENIDO-->
+
+
+
+<!--  BEGIN CONTENIDO-->
+<!--  BEGIN MODAL-->
+<div class="modal fade" id="modal_nuevo" tabindex="-1" role="basic" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+<!--  END MODAL-->
+
+</div>
+
+<script>
+
+    function actualizarTabla(){
+        jQuery('#result').load('administracion/gestion/index');
+    }
+
+    function openModal(id,nombreArchivo){
+
+        var url = '/data/'+id+'_parametro.pdf';
+        var html =
+            '<div class="modal-header label-default">' +
+            //'<div class=""><i class="fa fa-windows"></i> PDF</div>' +
+            //'<div class="" style="text-align:right;"><button type="button" data-dismiss="modal" class="btn blue btn-xs"><i class="fa fa-times"></i>   Cerrar </button></div>' +
+            '<button type="button" class="close" data-dismiss="modal"> Cerrar</button>'+
+            '<div class="caption"><i class="fa fa-windows"></i> Vista Previa: '+nombreArchivo+'</div>'+
+            '</div>' +
+            '<div class="modal-body">' +
+            '<iframe src="'+url+'" width="100%" height="450" frameborder=0></iframe>' +
+            '</div>'+
+            '<div class="modal-footer label-default">'+
+            '<button class="btn btn-xs blue" type="button" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>'+
+            '</div>';
+        $('.modal-content').html(html);
+
+        $('#modal_nuevo').modal('show');
+
+        //var url = '/data/'+id+'_parametro.pdf';
+        //window.showModalDialog(url,null, "dialogWidth:900px; dialogHeight:500px;dialogLeft:150;dialogTop:50;");
+    }
+
+
+    jQuery(document).ready(function () {
+        var initTable1 = function () {
+
+            var oTable = $('#tbl_periodos');
+
+            var cabeceraImpresion =
+                "<div class='text-left' style='font-size: 1.2em'>" +
+                    "<span><b>MINISTERIO DE ECONOMIA Y FINANZAS PUBLICAS</b></span>" +
+                    "<br><span><?php echo \MisLibrerias\DatosSesion::getAplicacion() ?></span>" +
+                    "<br><span>ADMINISTRACION DE PERIODOS</span>" +
+                    "<br><span>REPORTE AL <?php echo date("d-m-Y")?></span>" +
+                "</div>";
+            var cabeceraImpresionXls =
+                "MINISTERIO DE ECONOMIA Y FINANZAS PUBLICAS" +
+                    "\n<?php echo \MisLibrerias\DatosSesion::getAplicacion() ?>" +
+                    "\nADMINISTRACION DE PERIODOS" +
+                    "\nREPORTE AL <?php echo date("d-m-Y")?>\n";
+
+            // begin first table
+            oTable.dataTable({
+                dom: 'T<"clear">lfrtip',
+                //dom: 'T<"clear">lfrtip<"clear spacer">T',
+                tableTools: {
+                    "sSwfPath":  "/assets/global/plugins/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+
+                    "aButtons": [
+
+                       // "select",
+                        //"print",
+                        //{
+                        //    "sExtends":    "collection",
+                        //    "sButtonText": "Save",
+                    //    "aButtons":    [ "csv", "xls", "pdf" ]
+                        //},
+
+                        {
+                            "sExtends": "xls",
+                            "sButtonText": "Exportar a Excel",
+                            "sMessage": cabeceraImpresionXls,
+                            "mColumns": "orderable",
+                            "sFileName": "Periodo_<?php echo date('d-m-Y')?>.csv",
+                            "oSelectorOpts": {
+                                page: 'all'
+                            },
+                            "fnClick": function( nButton, oConfig, flash ) {
+                                this.fnSetText( flash,  oConfig.sMessage +"\n"+ this.fnGetTableData(oConfig) );
+                            }
+                        },
+
+                        {
+                            "sExtends":    "print",
+                            "sButtonText": "Imprimir",
+                            "sInfo":  "",
+                            "bShowAll": true,
+                            //"hidden": [true,true,true,false,false],
+                            "sMessage": cabeceraImpresion,
+                            //"mColumns": "orderable",
+                            "fnClick": function( button, conf ) {
+                                this.fnPrint( true, conf);
+                                window.print();
+                                //window.close();
+                                this.fnPrint( false, conf);
+                            }
+                        },
+
+
+
+                    ]
+
+                },
+
+                // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js).
+                // So when dropdowns used the scrollable div should be removed.
+                //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
+
+                 //"bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+                "columns": [
+                  {"visible": true},
+                  {"visible": true},
+                  {"visible": true},
+                  {"visible": true},
+                  {"visible": true},
+                  {"visible": true},
+                  {"visible": true},
+                 ],
+                "lengthMenu": [
+                    [5, 10, 15, 20, -1],
+                    [5, 10, 15, 20, "Todos"] // change per page values here
+                ],
+                // set the initial value
+                "pageLength": 10,
+                "pagingType": "bootstrap_full_number",
+
+                /*"language": {
+                    //url: 'http://cdn.datatables.net/plug-ins/3cfcc339e89/i18n/Spanish.json'
+                   // url: '/assets/global/plugins/datatables/plugins/bootstrap/es_ES.txt'
+                },*/
+
+                "columnDefs": [
+                    { 'orderable': true,'targets': [0]},
+                    { 'orderable': true,'targets': [1]},
+                    { 'orderable': true,'targets': [2]},
+                    { 'orderable': true,'targets': [3]},
+                    { 'orderable': true,'targets': [4]},
+                    { 'orderable': true,'targets': [5]},
+                    { 'orderable': false,'targets': [6]},
+                ],
+
+                "order": [
+                    [0, "asc"],[2, "asc"]
+                ], // set first column as a default sort by asc
+                bFilter : true,
+            }).columnFilter({aoColumns:[
+                    null,
+                    null,
+                { type: "select",sSelector: "#gestionFilter" },
+                null,
+                { type:"select", values : ["FORMULACION", "SEGUIMIENTO", "EVALUACION", "NO DEFINIDO"], sSelector: "#miEstadoFilter" },
+                    null,
+                    null,
+                ]}
+            );
+
+            var tableWrapper = jQuery('#tbl_periodos_wrapper');
+            tableWrapper.find('.dataTables_length select').select2(); // initialize select2 dropdown
+            jQuery('#tbl_periodos_wrapper .dataTables_filter input').addClass("form-control input-small input-inline"); // modify table search input
+           // jQuery('#filter_global .select_filter').select2();
+           // jQuery('#filter_global .select_filter').addClass("form-control select_filter_custom"); // modify table per page dropdown
+             tableWrapper.find('.dataTables_length select').addClass("form-control input-small input-inline"); // modify table per page dropdown
+
+            $('#tbl_periodos_column_toggler input[type="checkbox"]').change(function(){
+                /* Get the DataTables object again - this is not a recreation, just a get of the object*/
+                var iCol = parseInt($(this).attr("data-column"));
+                var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;
+                oTable.fnSetColumnVis(iCol, (bVis ? false : true));
+            });
+
+
+/*            var tt = new $.fn.dataTable.TableTools( table );
+            $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');*/
+
+        }
+
+        if (!jQuery().dataTable) {
+            return;
+        }
+
+        initTable1();
+    });
+
+
+    jQuery(document).ready(function () {
+
+        $('#tbl_periodos').on('click', '#cambiar_vigencia', function (e) {
+
+            var pageContentBody = $('.page-content .page-content-body');
+
+            var id = $(this).attr("data-id");
+            var url_callback = jQuery(this).attr("data-url-callback");
+            var url = jQuery(this).attr("data-url");
+            e.preventDefault();
+            Metronic.startPageLoading();
+            $.ajax({
+                url: url,
+                data: {id: id},
+                type: 'GET',
+                async: false,
+                dataType: "json",
+                success: function (data) {
+                    Metronic.stopPageLoading();
+                    if (data.respuesta) {
+                        Metronic.startPageLoading();
+                       //jQuery('.page-content-body').load(url_callback);
+                        //pageContentBody.load(url_callback);
+                        //jQuery('#result').load(url_callback);
+                        jQuery('.page-content .page-content-body').load(url_callback);
+                        Metronic.stopPageLoading();
+                        toastr.success(data.mensaje, 'SUCCESS');
+                    } else {
+                        toastr.error(data.mensaje, 'ERROR');
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    toastr.error('OCURRIÓ UN ERROR AL EJECUTAR LA PAGINA', 'ERROR');
+                    Metronic.stopPageLoading();
+                }
+            });
+
+        });
+
+
+        $('#tbl_periodos').on('click', '#eliminar', function (e) {
+
+            var id = $(this).attr("data-id");
+            var url_callback = jQuery(this).attr("data-url-callback");
+            var url = jQuery(this).attr("data-url");
+            bootbox.setDefaults({
+                locale: "es",
+                title: "Confirmación"
+            });
+            bootbox.confirm("ESTA SEGURO QUE DESEA ELIMINAR EL REGISTRO?", function (result) {
+                if (result) {
+                    e.preventDefault();
+                    Metronic.startPageLoading();
+                    $.ajax({
+                        url: url,
+                        data: {id: id},
+                        type: 'GET',
+                        async: false,
+                        dataType: "json",
+                        success: function (data) {
+                            Metronic.stopPageLoading();
+                            if (data.respuesta) {
+                                Metronic.startPageLoading();
+                                //jQuery('.page-content-body').load(url_callback);
+                                jQuery('.page-content .page-content-body').load(url_callback);
+                                Metronic.stopPageLoading();
+                                toastr.success(data.mensaje, 'SUCCESS');
+                            } else {
+                                toastr.error(data.mensaje, 'ERROR');
+                            }
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            toastr.error('OCURRRIO UN ERROR AL EJECUTAR LA PAGINA', 'ERROR');
+                            Metronic.stopPageLoading();
+                        }
+                    });
+                }
+
+            });
+
+
+        });
+
+
+    });
+
+
+</script>
+
+<style>
+    /*.form-control{
+        height: 2px;
+        padding-bottom: 1px;
+        padding-top: 1px;
+    }*/
+   /*  .select2-container
+     .select2-choice{
+        background-color: #eeeeee;
+         height: 28px;
+         padding-bottom: 5px;
+         padding-top: 0px;
+    }
+    .select_filter_custom{
+        font-size: 10px;
+    }*/
+
+
+</style>

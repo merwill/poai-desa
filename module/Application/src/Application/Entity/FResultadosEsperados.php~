@@ -1,0 +1,127 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * FResultadosEsperados
+ *
+ * @ORM\Table(name="f_resultados_esperados", indexes={@ORM\Index(name="IDX_D460F568CA586C85", columns={"id_poai"})})
+ * @ORM\Entity
+ */
+class FResultadosEsperados
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_resultados_esperados", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="f_resultados_esperados_id_resultados_esperados_seq", allocationSize=1, initialValue=1)
+     */
+    private $idResultadosEsperados;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nro_operacion", type="string", length=30, nullable=true)
+     */
+    private $nroOperacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="operacion", type="string", length=225, nullable=true)
+     */
+    private $operacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tipo_resultado", type="string", length=30, nullable=true)
+     */
+    private $tipoResultado;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ponderacion_cantidad", type="integer", nullable=true)
+     */
+    private $ponderacionCantidad;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ponderacion_oportunidad", type="integer", nullable=true)
+     */
+    private $ponderacionOportunidad;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ponderacion_cualitativa", type="integer", nullable=true)
+     */
+    private $ponderacionCualitativa;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="medio_verificacion", type="string", length=50, nullable=true)
+     */
+    private $medioVerificacion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ponderacion", type="integer", nullable=true)
+     */
+    private $ponderacion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="total_ponderacion", type="integer", nullable=true)
+     */
+    private $totalPonderacion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var \Application\Entity\FPoai
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\FPoai")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_poai", referencedColumnName="id_poai")
+     * })
+     */
+    private $idPoai;
+
+
+}

@@ -1,0 +1,155 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * EPorResultados
+ *
+ * @ORM\Table(name="e_por_resultados", indexes={@ORM\Index(name="IDX_79E763277B674A84", columns={"id_evaluacion"})})
+ * @ORM\Entity
+ */
+class EPorResultados
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_resultado", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="e_por_resultados_id_resultado_seq", allocationSize=1, initialValue=1)
+     */
+    private $idResultado;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nro_resultado", type="integer", nullable=true)
+     */
+    private $nroResultado;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="podereacion_asignada", type="integer", nullable=true)
+     */
+    private $podereacionAsignada;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cantidad_programada", type="integer", nullable=true)
+     */
+    private $cantidadProgramada;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cantidad_esperada", type="integer", nullable=true)
+     */
+    private $cantidadEsperada;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="oportunidad_esperada", type="integer", nullable=true)
+     */
+    private $oportunidadEsperada;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="indicador_esperado", type="integer", nullable=true)
+     */
+    private $indicadorEsperado;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cantidad_realizada", type="integer", nullable=true)
+     */
+    private $cantidadRealizada;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="calificacion_cantidad_obtenida", type="integer", nullable=true)
+     */
+    private $calificacionCantidadObtenida;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="calificacion_oportunidad_obtenida", type="bigint", nullable=true)
+     */
+    private $calificacionOportunidadObtenida;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="calificacion_indicador_obtenida", type="integer", nullable=true)
+     */
+    private $calificacionIndicadorObtenida;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="calificacion_resultado_obtenido", type="integer", nullable=true)
+     */
+    private $calificacionResultadoObtenido;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="resultado_pocentual_obtenido", type="bigint", nullable=true)
+     */
+    private $resultadoPocentualObtenido;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="puntaje_final", type="integer", nullable=true)
+     */
+    private $puntajeFinal;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var \Application\Entity\EEvaluacion
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\EEvaluacion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_evaluacion", referencedColumnName="id_evaluacion")
+     * })
+     */
+    private $idEvaluacion;
+
+
+}

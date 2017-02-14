@@ -1,0 +1,71 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ETemasSugeridos
+ *
+ * @ORM\Table(name="e_temas_sugeridos", indexes={@ORM\Index(name="IDX_C3837BC8642D436A", columns={"id_informe_actividades"})})
+ * @ORM\Entity
+ */
+class ETemasSugeridos
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_temas", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="e_temas_sugeridos_id_temas_seq", allocationSize=1, initialValue=1)
+     */
+    private $idTemas;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="denominacion", type="string", length=225, nullable=true)
+     */
+    private $denominacion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var \Application\Entity\EInformeActividades
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\EInformeActividades")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_informe_actividades", referencedColumnName="id_informe_actividades")
+     * })
+     */
+    private $idInformeActividades;
+
+
+}

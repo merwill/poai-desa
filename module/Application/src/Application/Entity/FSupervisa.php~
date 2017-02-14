@@ -1,0 +1,78 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * FSupervisa
+ *
+ * @ORM\Table(name="f_supervisa", indexes={@ORM\Index(name="IDX_B6D1D9CFCA586C85", columns={"id_poai"})})
+ * @ORM\Entity
+ */
+class FSupervisa
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_supervisa", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="f_supervisa_id_supervisa_seq", allocationSize=1, initialValue=1)
+     */
+    private $idSupervisa;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=250, nullable=false)
+     */
+    private $descripcion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=false)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=false)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=20, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=20, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cantidad", type="integer", nullable=true)
+     */
+    private $cantidad;
+
+    /**
+     * @var \Application\Entity\FPoai
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\FPoai")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_poai", referencedColumnName="id_poai")
+     * })
+     */
+    private $idPoai;
+
+
+}

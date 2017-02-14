@@ -1,0 +1,46 @@
+<h3 class="page-title">
+    Reportes de POAI's
+    <small></small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="/">Evaluacion</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="eadmReportesPoais">Reportes de POAI's</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="#">Reportes de POAI's</a>
+        </li>
+    </ul>
+</div>
+
+<div class="portlet box purple">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-pencil"></i> Reportes de POAI's
+        </div>
+        <div class="tools">
+            <a href="/application/index/eadmReportesPoais2" class="ajaxify reload" title="Refrescar"></a>
+            <a href=""
+               data-url="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'eadmReportesPoais2Grid')); ?>"
+               class="reload"></a>
+        </div>
+    </div>
+    <div class="portlet-body">
+        <?php echo $this->gridWidget ?>
+    </div>
+    <!--<div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-pencil"></i> Reportes de POAI's
+        </div>
+        <div class="tools">
+            <a href="/application/index/eadmReportesPoais2" class="ajaxify" title="Refrescar"><i class="fa fa-refresh"></i></a>
+        </div>
+    </div>-->
+</div>
+

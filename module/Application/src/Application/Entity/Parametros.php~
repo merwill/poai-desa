@@ -1,0 +1,92 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Parametros
+ *
+ * @ORM\Table(name="parametros", indexes={@ORM\Index(name="IDX_E0969117ECBF5171", columns={"id_padre_parametro"})})
+ * @ORM\Entity
+ */
+class Parametros
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_parametro", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="parametros_id_parametro_seq", allocationSize=1, initialValue=1)
+     */
+    private $idParametro;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sigla", type="string", length=10, nullable=false)
+     */
+    private $sigla;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=200, nullable=false)
+     */
+    private $descripcion;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="boolean", nullable=true)
+     */
+    private $estado;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="orden", type="integer", nullable=true)
+     */
+    private $orden;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cod_usuario", type="string", length=100, nullable=true)
+     */
+    private $codUsuario;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_hora", type="datetime", nullable=true)
+     */
+    private $fechaHora;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="estacion", type="string", length=100, nullable=true)
+     */
+    private $estacion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nivel", type="integer", nullable=true)
+     */
+    private $nivel;
+
+    /**
+     * @var \Application\Entity\Parametros
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\Parametros")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_padre_parametro", referencedColumnName="id_parametro")
+     * })
+     */
+    private $idPadreParametro;
+
+
+}

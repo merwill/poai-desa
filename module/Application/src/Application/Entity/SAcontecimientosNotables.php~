@@ -1,0 +1,71 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * SAcontecimientosNotables
+ *
+ * @ORM\Table(name="s_acontecimientos_notables", indexes={@ORM\Index(name="IDX_513B02B8A60AB375", columns={"nro_item"})})
+ * @ORM\Entity
+ */
+class SAcontecimientosNotables
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_acontecimiento", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="s_acontecimientos_notables_id_acontecimiento_seq", allocationSize=1, initialValue=1)
+     */
+    private $idAcontecimiento;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="boolean", nullable=true)
+     */
+    private $estado;
+
+    /**
+     * @var \Application\Entity\Puesto
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\Puesto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="nro_item", referencedColumnName="nro_item")
+     * })
+     */
+    private $nroItem;
+
+
+}

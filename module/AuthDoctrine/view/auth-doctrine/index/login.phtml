@@ -1,0 +1,111 @@
+<div id="mensaje-login">
+    <p class="text-center text-warning" style="font-weight: bold;">
+        <?php echo $this->messages; ?>
+    </p>
+</div>
+
+<div class="login-panel panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Ingrese sus credenciales</h3>
+    </div>
+    <div class="panel-body">
+
+        <?php
+        $form = $this->form;
+        $form->setAttribute('action', $this->url('auth-doctrine/default', array('controller' => 'index', 'action' => 'login')));
+        $form->prepare();
+
+        echo $this->form()->openTag($form); ?>
+
+        <fieldset>
+            <div class="form-group">
+                <?php echo $this->formRow($form->get('username')); ?>
+            </div>
+            <div class="form-group">
+                <?php echo $this->formRow($form->get('password')); ?>
+            </div>
+
+            <div class="checkbox">
+                <label>
+                    <?php echo $this->formRow($form->get('rememberme')); ?>
+                </label>
+            </div>
+
+            <?php if (isset($this->aplicacionesRegistradas) && count($this->aplicacionesRegistradas) > 0) { ?>
+                <div class="form-group">
+                    <div class="form-group-2">
+                        <?php echo $this->formRow($form->get('aplicaciones')); ?>
+                    </div>
+                </div>
+
+            <?php } ?>
+
+
+            <?php if (isset($this->aplicacionesRegistradas) && count($this->aplicacionesRegistradas) > 0) { ?>
+                <div class="form-actions fluid">
+                    <div class="col-md-offset-2 col-md-10">
+                        <?php echo $this->formRow($form->get('submit')); ?>
+                        <a href="<?php echo $this->url('auth-doctrine/default', array('controller' => 'index', 'action' => 'logout')); ?>">
+                            <button class="btn btn-default" type="button">Cancelar</button>
+                        </a>
+                    </div>
+                </div>
+            <?php } else { ?>
+                <div class="form-actions fluid">
+                    <div class="col-md-offset-3 col-md-9">
+                        <?php echo $this->formRow($form->get('submit')); ?>
+                    </div>
+                </div>
+            <?php } ?>
+        </fieldset>
+        <?php echo $this->form()->closeTag(); ?>
+    </div>
+</div>
+<div align="right" style="padding: 0 10px 10px 0;">
+    <?php // view helper
+    if ($user = $this->identity()) {
+        // echo 'Está logueado como: ' . $this->escapeHtml($user->getUsrName());
+        ?>
+        <!-- | <a href="<?php //echo $this->url('auth-doctrine/default', array('controller' => 'index', 'action' => 'logout'));?>">Salir</a>-->
+        <?php
+    } else {
+        // echo 'No logueado';
+    }
+    ?>
+
+    <div class="row">
+        <div class="col-md-6 text-left">
+            <a href="<?php echo $this->url('auth-doctrine/default', array('controller' => 'registration', 'action' => 'recordar-password')); ?>">OLVIDO SU CLAVE?</a>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="<?php echo $this->url('auth-doctrine/default', array('controller' => 'registration', 'action' => 'cambiar-password')); ?>">CAMBIAR CLAVE</a>
+        </div>
+    </div>
+
+</div>
+
+<?php if (isset($this->aplicacionesRegistradas) && count($this->aplicacionesRegistradas) > 0) { ?>
+
+    <script>
+
+        $(".form-group-2").addClass('has-error');
+        $("#username").attr('readonly', 'readonly');
+        $("#password").attr('readonly', 'readonly');
+
+        $( "#aplicaciones").change(function() {
+            if($("#aplicaciones").val() != "" ){
+                $(".form-group-2").removeClass('has-error');
+                $(".form-group-2").addClass('has-success');
+                $("#mensaje-login").hide();
+            }else{
+                //form-control
+                $(".form-group-2").removeClass('has-success');
+                $(".form-group-2").addClass('has-error');
+                $("#mensaje-login").show();
+            }
+        });
+
+    </script>
+
+<?php } ?>
+

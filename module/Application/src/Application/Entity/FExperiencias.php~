@@ -1,0 +1,99 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * FExperiencias
+ *
+ * @ORM\Table(name="f_experiencias", indexes={@ORM\Index(name="IDX_CAECACFDCA586C85", columns={"id_poai"})})
+ * @ORM\Entity
+ */
+class FExperiencias
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_experiencia", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="f_experiencias_id_experiencia_seq", allocationSize=1, initialValue=1)
+     */
+    private $idExperiencia;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="area_experiencia", type="string", length=225, nullable=true)
+     */
+    private $areaExperiencia;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sector", type="string", length=100, nullable=true)
+     */
+    private $sector;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="boolean", nullable=true)
+     */
+    private $estado;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_experiencias_p", type="integer", nullable=true)
+     */
+    private $idExperienciasP;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prioridad_experiencia", type="string", length=30, nullable=true)
+     */
+    private $prioridadExperiencia;
+
+    /**
+     * @var \Application\Entity\FPoai
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\FPoai")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_poai", referencedColumnName="id_poai")
+     * })
+     */
+    private $idPoai;
+
+
+}

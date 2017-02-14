@@ -1,0 +1,159 @@
+<?php //if(count($listaItemsSupervisa) == 0) return; ?>
+<div class="row">
+    <div class="col-md-12">
+<table class="table  table-hover table-bordered  table-condensed"
+       id="tbl_items_supervisa" style="font-size: 10px;" width="100%">
+    <thead>
+    <tr style="color: Menu; background-color: #67809f">
+        <th class="text-center" style="width: 10%;">N°</th>
+        <th class="text-center" style="width: 70%;">Funcion General</th>
+        <th class="text-center" style="width: 10%;">Especificación</th>
+        <th class="text-center" style="width: 10%;">Acción</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+        $count = 0;
+        foreach ($listaItemsSupervisa as $registro):
+            $count++;
+       ?>
+        <tr id="linea_<?php echo $registro['id_poai'] ?>_<?php echo $registro['id_funcion'] ?>">
+            <td class="text-center"><?php echo $count ?>
+                <input type="hidden" id="id_puesto_supervisa_<?php echo $registro['id_funcion'] ?>" name="id_puesto_supervisa_<?php echo $registro['id_funcion'] ?>" value="<?php echo $registro['id_funcion'] ?>">
+            </td>
+            <td class="text-left"><?php echo $registro['descripcion'] ?></td>
+            <td class="text-center"><?php echo $registro['especificacion'] ?></td>
+            <td class="text-center">
+                <button id="removeButtonSupervisa" class="btn btn-danger btn-sm" type="button"
+                        onclick="eliminarItemSupervision(<?php echo $this->idGp ?>,<?php echo $registro['id_poai'] ?>,<?php echo $registro['id_funcion'] ?>,<?php echo $registro['id_funcion'] ?>)">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </td>
+
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+<!--    <tfoot>
+    <tr style="background-color: #3799dc; display: block">
+        <td>Supervisa</td>
+        <td>Cantidad</td>
+        <td>Acción</td>
+    </tr>
+    </tfoot>-->
+</table>
+</div>
+</div>
+<script type="text/javascript">
+
+    function eliminarItemSupervision(idGp, idPoai, idPuesto,idSupervision){
+
+        var vsl_mensaje = "ESTA SEGURO DE ELIMINAR EL ITEM?";
+        bootbox.confirm(vsl_mensaje, function(result) {
+            if(result){
+
+                var url = '/formulacion/index/elimina-detalle-supervisa'
+                Metronic.startPageLoading();
+                $.ajax({
+                    url : url,
+                    data : { id : idGp , id2 : idPoai ,id3 : idPuesto, id4: idSupervision },
+                    cache: false,
+                    type: "GET",
+                    dataType: "json",
+                    success : function(data) {
+                        if(data.respuesta){
+                            Metronic.startPageLoading();
+                            jQuery('#divTablaSupervisa').load('/formulacion/index/lista-items-supervisa/1/'+ idGp + '/'+idPoai);
+                            $("#linea_" + idPoai+'_'+idPuesto).remove();
+                            counterSupervisa--;
+                            Metronic.stopPageLoading();
+                            toastr.success(data.mensaje, 'SUCCESS');
+                        }else{
+                            toastr.error(data.mensaje, 'ERROR');
+                        }
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $('#divTablaSupervisa').html('<h4>OCURRIO UN ERROR EN LA CARGA DE LA PAGINA..</h4>');
+                        Metronic.stopPageLoading();
+                    }
+                });
+            }
+        });
+
+    }
+
+    jQuery(document).ready(function () {
+
+        //var oTable = $('#tbl_items_supervisa');
+        //oTable.dataTable();
+
+        var initTable11 = function () {
+
+            var oTable = $('#tbl_items_supervisa');
+            // begin first table
+            oTable.dataTable({
+                // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js).
+                // So when dropdowns used the scrollable div should be removed.
+                //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
+
+                 //"bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+                "columns": [
+                  {"visible": true},
+                  {"visible": true},
+                  {"visible": true},
+                  {"visible": true},
+                 ],
+                "lengthMenu": [
+                    [5, 10, 15, 20, -1],
+                    [5, 10, 15, 20, "Todos"] // change per page values here
+                ],
+                // set the initial value
+                "pageLength": 10,
+                "pagingType": "bootstrap_full_number",
+
+                /*"language": {
+                    //url: 'http://cdn.datatables.net/plug-ins/3cfcc339e89/i18n/Spanish.json'
+                   // url: '/assets/global/plugins/datatables/plugins/bootstrap/es_ES.txt'
+                },*/
+
+                "columnDefs": [
+                    { 'orderable': true,'targets': [0]},
+                    { 'orderable': true,'targets': [1]},
+                    { 'orderable': true,'targets': [2]},
+                    { 'orderable': true,'targets': [3]},
+                ],
+
+                "order": [
+                    [3, "asc"]
+                ],
+                bFilter : false, bInfo: false, bPaginate: false,
+            });
+
+           // var tableWrapper = jQuery('#tbl_items_supervisa_wrapper');
+           // tableWrapper.find('.dataTables_length select').select2(); // initialize select2 dropdown
+           // jQuery('#tbl_items_supervisa_wrapper .dataTables_filter input').addClass("form-control input-small input-inline"); // modify table search input
+           // tableWrapper.find('.dataTables_length select').addClass("form-control input-small input-inline"); // modify table per page dropdown
+
+           /* $('#tbl_items_supervisa_column_toggler input[type="checkbox"]').change(function(){
+                var iCol = parseInt($(this).attr("data-column"));
+                var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;
+                oTable.fnSetColumnVis(iCol, (bVis ? false : true));
+            });*/
+
+
+/*            var tt = new $.fn.dataTable.TableTools( table );
+            $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');*/
+
+        }
+
+        if (!jQuery().dataTable) {
+           // return;
+        }
+
+       // initTable1();
+    });
+
+
+</script>

@@ -1,0 +1,638 @@
+<div class="panel-group accordion" id="accordion1">
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1">
+                    2.1. Objetivo del Puesto </a>
+            </h4>
+        </div>
+        <div id="collapse_1" class="panel-collapse in">
+            <div class="panel-body" style="background-color: #f6f6f6">
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label">Que hace? <span class=""> * </span></label>
+                    <div class="col-md-8">
+                        <textarea class="form-control"  placeholder="Ingrese descripcion..." rows="1" name="id_que_hace"></textarea>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label">De que forma? <span class=""> * </span></label>
+                    <div class="col-md-8">
+                        <textarea class="form-control"  placeholder="Ingrese descripcion..." rows="1" name="id_de_que_forma"></textarea>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label">Con que finalidad? <span class=""> * </span></label>
+                    <div class="col-md-8">
+                        <textarea class="form-control"  placeholder="Ingrese descripcion..." rows="1" name="id_con_que_finalidad"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary Menu">
+        <div class="panel-heading">
+            <h4 class="panel-title ">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_2">
+                    2.2. Normas a Cumplir </a>
+            </h4>
+        </div>
+        <div id="collapse_2" class="panel-collapse collapse">
+            <div class="panel-body" style="background-color: #eeeeee">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="portlet box blue  bordered">
+                            <div class="portlet-title">
+                                <div class="caption font-white-sunglo">
+                                    <i class="icon-settings font-white-sunglo"></i>
+                                    <span class="caption-subject bold uppercase"> Normas Generales</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body form">
+                                <div class="form-group">
+                                    <div class="form-group form-md-line-input">
+                                        <label class="col-md-2 control-label">1. </label>
+                                        <div class="col-md-8">
+                                            <select class="form-control" id="form_control_ng_1" name="form_control_ng_1">
+                                                <option value="">Seleccione Norma General...</option>
+                                                <?php foreach($this->normativasGenerales as $normativa) {
+                                                    $selected = "";
+                                                    foreach($this->normativasValores as $normativaValor) {
+                                                        if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                            && $normativaValor['orden'] == 1){
+                                                            $selected = "selected";
+                                                        }
+                                                    }
+                                                    ?>
+                                                    <option value="<?php echo $normativa['id_parametricas'] ?>" <?php echo $selected ?> >
+                                                        <?php  echo $normativa['descripcion'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group form-md-line-input">
+                                        <label class="col-md-2 control-label">2. </label>
+                                        <div class="col-md-8">
+                                            <select class="form-control" id="form_control_ng_2">
+                                                <option value="">Seleccione Norma General...</option>
+                                                <?php foreach($this->normativasGenerales as $normativa) {
+                                                    $selected = "";
+                                                    foreach($this->normativasValores as $normativaValor) {
+                                                        if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                            && $normativaValor['orden'] == 2){
+                                                            $selected = "selected";
+                                                        }
+                                                    }
+
+                                                    ?>
+                                                    <option value="<?php echo $normativa['id_parametricas'] ?>"
+                                                        <?php echo $selected; ?>
+                                                    ><?php  echo $normativa['descripcion'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group form-md-line-input">
+                                        <label class="col-md-2 control-label">3. </label>
+                                        <div class="col-md-8">
+                                            <select class="form-control" id="form_control_ng_3">
+                                                <option value="">Seleccione Norma General...</option>
+                                                <?php foreach($this->normativasGenerales as $normativa) {
+                                                    $selected = "";
+                                                    foreach($this->normativasValores as $normativaValor) {
+                                                        if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                            && $normativaValor['orden'] == 3){
+                                                            $selected = "selected";
+                                                        }
+                                                    }
+                                                    ?>
+                                                    <option value="<?php echo $normativa['id_parametricas'] ?>"
+                                                        <?php echo $selected; ?>
+                                                    ><?php  echo $normativa['descripcion'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group form-md-line-input">
+                                        <label class="col-md-2 control-label">4. </label>
+                                        <div class="col-md-8">
+                                            <select class="form-control" id="form_control_ng_4">
+                                                <option value="">Seleccione Norma General...</option>
+                                                <?php foreach($this->normativasGenerales as $normativa) {
+                                                    $selected = "";
+                                                    foreach($this->normativasValores as $normativaValor) {
+                                                        if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                            && $normativaValor['orden'] == 4){
+                                                            $selected = "selected";
+                                                        }
+                                                    }
+                                                    ?>
+                                                    <option value="<?php echo $normativa['id_parametricas'] ?>"
+                                                        <?php echo $selected; ?>
+                                                    ><?php  echo $normativa['descripcion'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group form-md-line-input">
+                                        <label class="col-md-2 control-label">5. </label>
+                                        <div class="col-md-8">
+                                            <select class="form-control" id="form_control_ng_5">
+                                                <option value="">Seleccione Norma General...</option>
+                                                <?php foreach($this->normativasGenerales as $normativa) {
+                                                    $selected = "";
+                                                    foreach($this->normativasValores as $normativaValor) {
+                                                        if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                            && $normativaValor['orden'] == 5){
+                                                            $selected = "selected";
+                                                        }
+                                                    }
+                                                    ?>
+                                                    <option value="<?php echo $normativa['id_parametricas'] ?>"
+                                                        <?php echo $selected; ?>
+                                                    ><?php  echo $normativa['descripcion'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="portlet box blue  bordered">
+                            <div class="portlet-title">
+                                <div class="caption font-white-sunglo">
+                                    <i class="icon-settings font-white-sunglo"></i>
+                                    <span class="caption-subject bold uppercase"> Normas Especificas</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body form">
+                                <div class="form-group">
+                                    <div class="form-group form-md-line-input">
+                                        <label class="col-md-2 control-label">1. </label>
+                                        <div class="col-md-8">
+                                            <select class="form-control" id="form_control_ne_1">
+                                                <option value="">Seleccione Normativa Especifica...</option>
+                                                <?php
+                                                foreach($this->normativasEspecificas as $normativa) {
+                                                    $selected = "";
+                                                    foreach($this->normativasValores as $normativaValor) {
+                                                        if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                            && $normativaValor['orden'] == 1){
+                                                            $selected = "selected";
+                                                        }
+                                                    }
+                                                    ?>
+                                                    <option value="<?php echo $normativa['id_parametricas'] ?>" <?php  echo $selected ?> >
+                                                        <?php  echo $normativa['descripcion'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group form-md-line-input">
+                                        <label class="col-md-2 control-label">2. </label>
+                                        <div class="col-md-8">
+                                            <select class="form-control" id="form_control_ne_2">
+                                                <option value="">Seleccione Normativa Especifica...</option>
+                                                <?php foreach($this->normativasEspecificas as $normativa) {
+                                                    $selected = "";
+                                                    foreach($this->normativasValores as $normativaValor) {
+                                                        if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                            && $normativaValor['orden'] == 2){
+                                                            $selected = "selected";
+                                                        }
+                                                    }
+                                                    ?>
+                                                    <option value="<?php echo $normativa['id_parametricas'] ?>" <?php  echo $selected ?> >
+                                                        <?php  echo $normativa['descripcion'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group form-md-line-input">
+                                        <label class="col-md-2 control-label">3. </label>
+                                        <div class="col-md-8">
+                                            <select class="form-control" id="form_control_ne_3">
+                                                <option value="">Seleccione Normativa Especifica...</option>
+                                                <?php foreach($this->normativasEspecificas as $normativa) {
+                                                    $selected = "";
+                                                    foreach($this->normativasValores as $normativaValor) {
+                                                        if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                            && $normativaValor['orden'] == 3){
+                                                            $selected = "selected";
+                                                        }
+                                                    }
+                                                    ?>
+                                                    <option value="<?php echo $normativa['id_parametricas'] ?>" <?php  echo $selected ?> >
+                                                        <?php  echo $normativa['descripcion'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group form-md-line-input">
+                                        <label class="col-md-2 control-label">4. </label>
+                                        <div class="col-md-8">
+                                            <select class="form-control" id="form_control_ne_4">
+                                                <option value="">Seleccione Normativa Especifica...</option>
+                                                <?php foreach($this->normativasEspecificas as $normativa) {
+                                                    $selected = "";
+                                                    foreach($this->normativasValores as $normativaValor) {
+                                                        if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                            && $normativaValor['orden'] == 4){
+                                                            $selected = "selected";
+                                                        }
+                                                    }
+                                                    ?>
+                                                    <option value="<?php echo $normativa['id_parametricas'] ?>" <?php  echo $selected ?> >
+                                                        <?php  echo $normativa['descripcion'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group form-md-line-input">
+                                        <label class="col-md-2 control-label">5. </label>
+                                        <div class="col-md-8">
+                                            <select class="form-control" id="form_control_ne_5">
+                                                <option value="">Seleccione Normativa Especifica...</option>
+                                                <?php foreach($this->normativasEspecificas as $normativa) {
+                                                    $selected = "";
+                                                    foreach($this->normativasValores as $normativaValor) {
+                                                        if($normativa['id_parametricas'] == $normativaValor['id_normas_p']
+                                                            && $normativaValor['orden'] == 5){
+                                                            $selected = "selected";
+                                                        }
+                                                    }
+                                                    ?>
+                                                    <option value="<?php echo $normativa['id_parametricas'] ?>" <?php  echo $selected ?> >
+                                                        <?php  echo $normativa['descripcion'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_3">
+                    2.3. Funciones Generales del Puesto</a>
+            </h4>
+        </div>
+        <div id="collapse_3" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">1. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">2. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">3. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">4. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">5. </label>
+                            </div>
+                        </div>
+                    </div>                                        <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">6. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">7. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">8. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">9. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">10. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_4">
+                    2.4 Funciones Especificas del Puesto </a>
+            </h4>
+        </div>
+        <div id="collapse_4" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">1. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">2. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">3. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">4. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">5. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">6. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">7. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">8. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">9. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-10" >
+                            <div class="form-group form-md-line-input form-md-floating-label has-error">
+                                <input type="text" class="form-control" id="form_control_1">
+                                <label for="form_control_1">10. </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Recurrente&nbsp;" data-off-text="&nbsp;Producto&nbsp;" data-on-color="success" data-off-color="warning" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

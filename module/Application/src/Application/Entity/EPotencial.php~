@@ -1,0 +1,85 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * EPotencial
+ *
+ * @ORM\Table(name="e_potencial", indexes={@ORM\Index(name="IDX_CB185BBB7B674A84", columns={"id_evaluacion"})})
+ * @ORM\Entity
+ */
+class EPotencial
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_potencial", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="e_potencial_id_potencial_seq", allocationSize=1, initialValue=1)
+     */
+    private $idPotencial;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="calificacion_horas_capacitacion", type="integer", nullable=true)
+     */
+    private $calificacionHorasCapacitacion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="calificacaion_curso_capacitacion", type="integer", nullable=true)
+     */
+    private $calificacaionCursoCapacitacion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="puntaje_final", type="integer", nullable=true)
+     */
+    private $puntajeFinal;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var \Application\Entity\EEvaluacion
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\EEvaluacion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_evaluacion", referencedColumnName="id_evaluacion")
+     * })
+     */
+    private $idEvaluacion;
+
+
+}

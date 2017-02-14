@@ -1,0 +1,75 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * FParametricas
+ *
+ * @ORM\Table(name="f_parametricas")
+ * @ORM\Entity
+ */
+class FParametricas
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_parametricas", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="f_parametricas_id_parametricas_seq", allocationSize=1, initialValue=1)
+     */
+    private $idParametricas;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_maestro", type="integer", nullable=false)
+     */
+    private $idMaestro;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=50, nullable=false)
+     */
+    private $descripcion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="estado", type="string", length=30, nullable=false)
+     */
+    private $estado;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+
+}

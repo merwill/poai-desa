@@ -1,0 +1,120 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ECumplimientoResultadosPoai
+ *
+ * @ORM\Table(name="e_cumplimiento_resultados_poai", indexes={@ORM\Index(name="IDX_DF6F2384642D436A", columns={"id_informe_actividades"})})
+ * @ORM\Entity
+ */
+class ECumplimientoResultadosPoai
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_cumplimiento_resultados", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="e_cumplimiento_resultados_poai_id_cumplimiento_resultados_seq", allocationSize=1, initialValue=1)
+     */
+    private $idCumplimientoResultados;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nro_resultado", type="integer", nullable=true)
+     */
+    private $nroResultado;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion_resultado", type="string", length=225, nullable=true)
+     */
+    private $descripcionResultado;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cantidad_realizada", type="integer", nullable=true)
+     */
+    private $cantidadRealizada;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="oportunidad_alcanzada", type="string", length=225, nullable=true)
+     */
+    private $oportunidadAlcanzada;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="indicador_cualitativo_alcanzado", type="integer", nullable=true)
+     */
+    private $indicadorCualitativoAlcanzado;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="medio_verificacion", type="string", length=225, nullable=true)
+     */
+    private $medioVerificacion;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="recursos_asignados", type="boolean", nullable=true)
+     */
+    private $recursosAsignados;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comentarios", type="string", length=225, nullable=true)
+     */
+    private $comentarios;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var \Application\Entity\EInformeActividades
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\EInformeActividades")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_informe_actividades", referencedColumnName="id_informe_actividades")
+     * })
+     */
+    private $idInformeActividades;
+
+
+}

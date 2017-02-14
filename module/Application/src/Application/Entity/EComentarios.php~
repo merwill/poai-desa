@@ -1,0 +1,78 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * EComentarios
+ *
+ * @ORM\Table(name="e_comentarios", indexes={@ORM\Index(name="IDX_CC8B649E7B674A84", columns={"id_evaluacion"})})
+ * @ORM\Entity
+ */
+class EComentarios
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_comentario", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="e_comentarios_id_comentario_seq", allocationSize=1, initialValue=1)
+     */
+    private $idComentario;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="evaluadores", type="string", length=2000, nullable=true)
+     */
+    private $evaluadores;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="evaluado", type="string", length=2000, nullable=true)
+     */
+    private $evaluado;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificacdor", type="string", length=100, nullable=true)
+     */
+    private $modificacdor;
+
+    /**
+     * @var \Application\Entity\EEvaluacion
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\EEvaluacion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_evaluacion", referencedColumnName="id_evaluacion")
+     * })
+     */
+    private $idEvaluacion;
+
+
+}

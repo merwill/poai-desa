@@ -1,0 +1,152 @@
+<div id="row">
+<div id="col-md-12">
+    <div class="">
+        <h3 class="title">
+            Administraci&oacute;n: <b>"<?php echo $this->tabla->getNombre(); ?>"</b>
+        </h3>
+    </div>
+    <div class="portlet box green">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-user"></i>Tablas param&eacute;tricas
+            </div>
+            <div class="actions">
+                <div class="btn-group btn-group-xs">
+
+                    <button type="button" id="idBtnAdicionar" class="btn btn-default"
+                            onclick="">
+                        <span class="fa fa-plus"></span> Adicionar
+                    </button>
+                    <button type="button" id = "idBtnActualizarListaUsuarios"  class="btn btn-default"
+                            data-loading-text="Cargando..." >
+                        <span class="fa fa-refresh"></span> Actualizar
+                    </button>
+                   <!-- <a class="btn btn-default" href="#" data-toggle="dropdown" data-control="dropdown">
+                        Columnas <i class="fa fa-angle-down"></i>
+                    </a>
+                    <div id="dataTables-generico_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
+                        <?php /*$nro = 0;
+                              foreach ($this->cabecera as $value):  */?>
+                            <label><input type="checkbox" checked data-column="<?php /*echo $nro++; */?>"> <?php /*echo $value; */?></label>
+                        <?php /*endforeach; */?>
+
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        <!--    <div class="portlet-body flip-scroll">-->
+        <!--    <div id="contenido">-->
+        <?php echo $this->partial('administracion/index/partial_list', array('listado' => $this->listado, 'cabecera' => $this->cabecera, 'dato' => $this->dato, 'id' => $this->id)); ?>
+        <?php //echo $this->paginationControl($this->listado, 'Sliding', 'paginator-slide', array('route' => 'administracion/paginator','id' => $this->id)); ?>
+        <!--        </div>-->
+        <!--    </div>-->
+    </div>
+
+    <div class="modal fade" id="modal_nuevo" role="basic" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<?php //echo $this->widgetModel ?>
+
+<script>
+
+
+
+
+    $('#idBtnAdicionar').click(function () {
+        var btn = $(this)
+        btn.button('loading')
+
+
+        var idModal = "miModal";
+        var title = "Formulario: <?php echo $this->tabla->getNombre(); ?> - Nuevo";
+        var idContent = "divContentModal";
+
+        openModalBootstrap(idModal,title,idContent)
+        $('#'+idContent).load('/administracion/index/form/'+ <?php echo $this->id ?>,function(){btn.button('reset')});
+
+    });
+
+
+
+    function editarRegistro(id){
+        //$('#idBtnEditar').click(function () {
+        //var btn = $(this);
+        var url = '/administracion/index/form/'+id+'/'+id;
+        //btn.button('loading');
+        //alert(href);
+
+        var idModal = "miModal";
+        var title = "Formulario: <?php echo $this->tabla->getNombre(); ?> - Editar";
+        var idContent = "divContentModal";
+
+        openModalBootstrap(idModal,title,idContent)
+        //$('#'+idContent).load('/formulacion/test/formulario',function(){btn.button('reset')});
+        $('#'+idContent).load(url);
+
+        //  });
+    }
+
+
+    $('#idBtnActualizarListaUsuarios').click(function () {
+        var btn = $(this);
+        btn.button('loading');
+
+        //App.startPageLoading();
+        Metronic.blockUI();
+
+        var idContent = "page-content-body";
+
+        var modulo =  'administracion';
+        var controller = '<?php echo $this->controller; ?>';
+        var action  = '<?php echo $this->action; ?>';
+        var id  = '<?php echo $this->id; ?>';
+//alert(id);
+        //var url = '/'+ modulo +'/'+controller +'/'+ action+'/'+id;
+        var url = '/administracion/index/parametrica/'+id;
+
+        $('.'+idContent).load(url,function(){btn.button('reset'); Metronic.unblockUI()});
+    });
+
+    function openModalBootstrap(idModal,title,idContent){
+
+        var dialogHtml = null;
+
+        dialogHtml = '<div class="modal" id="'+idModal+'" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">'+
+                //'     <div class="modal-backdrop">'+
+            '     <div class="modal-dialog modal-lg">'+
+            '<div class="modal-content">'+
+            '    <div class="modal-header" style="background-color: #EEEEEE">'+
+            '        <button type="button" class="close" onclick="closeModalBootstrap('+"'" + idModal + "'" + ')" aria-hidden="true">&times;</button>'+
+            '        <h4 class="modal-title" id="myModalLabel">'+title+'</h4>'+
+            '    </div>'+
+            '    <div class="modal-body" style="margin-bottom: 30px;">'+
+            '        <div id="'+idContent+'" ></div>'+
+            '    </div>'+
+            '    <div class="modal-footer"  style="background-color: #EEEEEE">'+
+                //'        <button type="button" class="btn btn-default red" onclick="closeModalBootstrap('+"'" + idModal + "'" + ')">Cerrar</button>'+
+                //'        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>'+
+                //'        <button type="button" class="btn btn-default">idContent</button>'+
+            '    </div>'+
+            '</div>'+
+            '</div>'+
+                //'</div>'+
+            '</div>';
+
+        //$(".page-content-body").append(dialogHtml);
+        $('body').append(dialogHtml);
+        $('#'+idModal).modal('show');
+    }
+
+    function closeModalBootstrap(idModal2){
+        $('#'+idModal2).modal('hide');
+        $('#'+idModal2).remove();
+        return true;
+    }
+
+</script>

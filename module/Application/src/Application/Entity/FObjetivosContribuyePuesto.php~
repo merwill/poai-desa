@@ -1,0 +1,78 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * FObjetivosContribuyePuesto
+ *
+ * @ORM\Table(name="f_objetivos_contribuye_puesto", indexes={@ORM\Index(name="IDX_17A20DC3CA586C85", columns={"id_poai"})})
+ * @ORM\Entity
+ */
+class FObjetivosContribuyePuesto
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_objetivo_contribuye", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="f_objetivos_contribuye_puesto_id_objetivo_contribuye_seq", allocationSize=1, initialValue=1)
+     */
+    private $idObjetivoContribuye;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codigo_objetivo", type="string", length=30, nullable=true)
+     */
+    private $codigoObjetivo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion_objetivo", type="string", length=225, nullable=true)
+     */
+    private $descripcionObjetivo;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var \Application\Entity\FPoai
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\FPoai")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_poai", referencedColumnName="id_poai")
+     * })
+     */
+    private $idPoai;
+
+
+}

@@ -1,0 +1,92 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * EPorCompetencias
+ *
+ * @ORM\Table(name="e_por_competencias", indexes={@ORM\Index(name="IDX_69A6467E7B674A84", columns={"id_evaluacion"})})
+ * @ORM\Entity
+ */
+class EPorCompetencias
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_competencia", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="e_por_competencias_id_competencia_seq", allocationSize=1, initialValue=1)
+     */
+    private $idCompetencia;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="competencia", type="string", length=50, nullable=true)
+     */
+    private $competencia;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comportamiento", type="string", length=225, nullable=true)
+     */
+    private $comportamiento;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="calificacion", type="integer", nullable=true)
+     */
+    private $calificacion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="resultado", type="integer", nullable=true)
+     */
+    private $resultado;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var \Application\Entity\EEvaluacion
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\EEvaluacion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_evaluacion", referencedColumnName="id_evaluacion")
+     * })
+     */
+    private $idEvaluacion;
+
+
+}

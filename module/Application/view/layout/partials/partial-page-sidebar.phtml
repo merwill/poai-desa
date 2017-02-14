@@ -1,0 +1,574 @@
+<div class="page-sidebar navbar-collapse collapse">
+    <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+        <li class="sidebar-toggler-wrapper">
+            <div class="sidebar-toggler">
+            </div>
+        </li>
+        <li class="sidebar-search-wrapper">
+            <form class="sidebar-search " action="/" method="POST">
+                <a href="javascript:;" class="remove">
+                    <i class="icon-close"></i>
+                </a>
+
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar...">
+                                                <span class="input-group-btn">
+                                                <a href="javascript:;" class="btn submit"><i
+                                                        class="icon-magnifier"></i></a>
+                                                </span>
+                </div>
+            </form>
+        </li>
+        <li class="menucito " id="principal">
+            <a href="javascript:;">
+                <i class="icon-home"></i>
+                <span class="title">PRINCIPAL</span>
+                <span class="selected" id="pp"></span>
+                <span class="arrow open"></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="item-menu active tooltips"
+                    data-container="body" data-placement="right" data-html="true"
+                    data-original-title="Pagina de Inicio"
+                    id="id_pagina_inicio" data-text="id_pagina_inicio">
+                    <a class="" href="/">
+                        <i class="icon-bulb"></i>
+                        Pagina de Inicio</a>
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true"
+                    data-original-title="Datos Sesion"
+                    id="id_datos_sesion" data-text="id_datos_sesion">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url(
+                           'application/default', array('controller' => 'index', 'action' => 'debug')
+                       ); ?>">
+                        <i class="icon-bulb"></i>
+                        Datos Sesion</a>
+                </li>
+            </ul>
+        </li>
+        <li class="menucito " id="administracion">
+            <a href="javascript:;">
+                <i class="icon-bulb"></i>
+                <span class="title">Administración</span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <?php foreach ($this->parametricas as $parametrica): ?>
+                    <li class="item-menu tooltips"
+                        data-container="body" data-placement="right" data-html="true"
+                        data-original-title="Gestion - Super Administrador"
+                        id="id_gestion_configuracion_<?php echo $parametrica->getId() ?>" data-text="id_gestion_configuracion_<?php echo $parametrica->getId() ?>">
+                        <a class="ajaxify"
+                           href="<?php echo $this->url('administracion/default', array('controller' => $parametrica->getController(), 'action' => 'enviar', 'id' => $parametrica->getId())); ?>">
+                            <i class="icon-bulb"></i>
+                            <?php echo $parametrica->getNombre(); ?>
+                        </a>
+
+                    </li>
+                <?php endforeach; ?>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true"
+                    data-original-title=""
+                    id="id_gestion_parametros" data-text="id_gestion_parametros">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('parametros/default', array('controller' => 'index', 'action' => 'index')); ?>">
+                        <i class="icon-grid"></i>
+                        Parametros
+                    </a>
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title=""
+                    id="id_gestion_periodos" data-text="id_gestion_periodos">
+                    <a class="ajaxify"
+                       href="administracion/gestion/index">
+                        <i class="icon-bulb"></i>
+                        Gestion Periodos
+                    </a>
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title=""
+                    id="id_gestion_usuarios" data-text="id_gestion_usuarios">
+                    <a class="ajaxify"
+                       href="administracion/gestion/index">
+                        <i class="icon-user"></i>
+                        Usuarios
+                    </a>
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title=""
+                    id="id_gestion_planificacion" data-text="id_gestion_planificacion">
+                    <a class="ajaxify"
+                       href="administracion/gestion/index">
+                        <i class="icon-user"></i>
+                        Planificación
+                    </a>
+                </li>
+            </ul>
+
+        </li>
+
+
+        <li class="menucito " id="administracion2" style="display: none">
+            <a href="javascript:;">
+                <i class="icon-bulb"></i>
+                <span class="title">Administración2</span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Gestion - Super Administrador"
+                    id="id_gestion_configuracion22" data-text="id_gestion_configuracion22">
+                    <a class="ajaxify"
+                       href="administracion/gestion/index">
+                        <i class="icon-bulb"></i>
+                        Gestion Periodos
+                    </a>
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Gestion - Super Administrador"
+                    id="id_gestion_configuracion" data-text="id_gestion_configuracion">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('administracion/default', array('controller' => 'gestion', 'action' => 'fsaCrearGestiones')); ?>">
+                        <i class="icon-bulb"></i>
+                        Gestion
+                    </a>
+                    <!--<ul class="sub-menu">
+                        <li class="item-menu tooltips"
+                            data-container="body" data-placement="right" data-html="true" data-original-title="Factores de Liquidación"
+                            id="id_crear_gestiones_configuracion" data-text="id_crear_gestiones_configuracion">
+                            <a class="ajaxify"
+                               href="<?php /*echo $this->url('application/default', array('controller' => 'index', 'action' => 'fsaCrearGestiones')); */?>">
+                                <i class="icon-bulb"></i>
+                                Crear Gestiones
+                            </a>
+                        </li>
+                        <li class="item-menu tooltips"
+                            data-container="body" data-placement="right" data-html="true" data-original-title="Tabla de Cotizaciones"
+                            id="id_historial_gestiones_configuracion" data-text="id_historial_gestiones_configuracion">
+                            <a class="ajaxify"
+                               href="<?php /*echo $this->url('application/default', array('controller' => 'index', 'action' => 'fsaHistorialGestiones')); */?>">
+                                <i class="icon-bulb"></i>
+                                Historial Gestiones
+                            </a>
+                        </li>
+                    </ul>-->
+                </li>
+
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Habilitar Usuarios - Super Administrador"
+                    id="id_habilitar_usuarios_configuracion" data-text="id_habilitar_usuarios_configuracion">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'fsaDarAltaBaja')); ?>">
+                        <i class="icon-bulb"></i>
+                        Habilitar Usuarios</a>
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Gestion de Planificacion - Administrador"
+                    id="id_gestion_planificacion_configuracion" data-text="id_gestion_planificacion_configuracion">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'fadmPlanificacionLlenadoPoai')); ?>">
+                        <i class="icon-bulb"></i>
+                        Gestion de Planificacion
+                    </a>
+                    <!-- <ul class="sub-menu">
+                        <li class="item-menu tooltips"
+                            data-container="body" data-placement="right" data-html="true" data-original-title="Planificacion de llenado de POAI"
+                            id="id_planificacion_llenado_poai_configuracion" data-text="id_planificacion_llenado_poai_configuracion">
+                            <a class="ajaxify"
+                               href="<?php /*echo $this->url('application/default', array('controller' => 'index', 'action' => 'fadmPlanificacionLlenadoPoai')); */?>">
+                                <i class="icon-bulb"></i>
+                                Planificacion de llenado de POAI
+                            </a>
+                        </li>
+                        <li class="item-menu tooltips"
+                            data-container="body" data-placement="right" data-html="true" data-original-title="Asignacion de Roles"
+                            id="id_asignacion_roles_configuracion" data-text="id_asignacion_roles_configuracion">
+                            <a class="ajaxify"
+                               href="<?php /*echo $this->url('application/default', array('controller' => 'index', 'action' => 'fadmAsignacionRoles')); */?>">
+                                <i class="icon-bulb"></i>
+                                Asignacion de roles
+                            </a>
+                        </li>
+                    </ul>-->
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Gestion de POAI's - Administrador"
+                    id="id_gestion_poais_configuracion" data-text="id_gestion_poais_configuracion">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'fadmControlAvance')); ?>">
+                        <i class="icon-bulb"></i>
+                        Gestion de POAI's
+                    </a>
+                    <!--<ul class="sub-menu">
+                        <li class="item-menu tooltips"
+                            data-container="body" data-placement="right" data-html="true" data-original-title="Control de Avance"
+                            id="id_control_avance_configuracion" data-text="id_control_avance_configuracion">
+                            <a class="ajaxify"
+                               href="<?php /*echo $this->url('application/default', array('controller' => 'index', 'action' => 'fadmControlAvance')); */?>">
+                                <i class="icon-bulb"></i>
+                                Control de Avance
+                            </a>
+                        </li>
+                        <li class="item-menu tooltips"
+                            data-container="body" data-placement="right" data-html="true" data-original-title="Historial de POAI's"
+                            id="id_historial_poais_configuracion" data-text="id_historial_poais_configuracion">
+                            <a class="ajaxify"
+                               href="<?php /*echo $this->url('application/default', array('controller' => 'index', 'action' => 'fadmHistorialPoais')); */?>">
+                                <i class="icon-bulb"></i>
+                                Historial de POAI's
+                            </a>
+                        </li>
+                        <li class="item-menu tooltips"
+                            data-container="body" data-placement="right" data-html="true" data-original-title="Estadisticas"
+                            id="id_estadisticas_configuracion" data-text="id_estadisticas_configuracion">
+                            <a class="ajaxify"
+                               href="<?php /*echo $this->url('application/default', array('controller' => 'index', 'action' => 'fadmEstadisticas')); */?>">
+                                <i class="icon-bulb"></i>
+                                Estadisticas
+                            </a>
+                        </li>
+                        <li class="item-menu tooltips"
+                            data-container="body" data-placement="right" data-html="true" data-original-title="Aprobacion POAI's"
+                            id="id_aprobacion_poais_configuracion" data-text="id_aprobacion_poais_configuracion">
+                            <a class="ajaxify"
+                               href="<?php /*echo $this->url('application/default', array('controller' => 'index', 'action' => 'fadmAprobacionPoais')); */?>">
+                                <i class="icon-bulb"></i>
+                                Aprobacion POAI's
+                            </a>
+                        </li>
+                    </ul>-->
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Revision de POAI's - Elaborador"
+                    id="id_revision_poais_configuracion" data-text="id_revision_poais_configuracion">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'felabRegistroPoais')); ?>">
+                        <i class="icon-bulb"></i>
+                        Revision de POAI's
+                    </a>
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Comenzar POAI - Operador"
+                    id="id_comenzar_poai_configuracion" data-text="id_comenzar_poai_configuracion">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'fopeNroItem')); ?>">
+                        <i class="icon-bulb"></i>
+                        Comenzar POAI
+                    </a>
+                    <!--<ul class="sub-menu">
+                        <li class="item-menu tooltips"
+                            data-container="body" data-placement="right" data-html="true" data-original-title=" Nro de Item"
+                            id="id_nro_item_configuracion" data-text="id_nro_item_configuracion">
+                            <a class="ajaxify"
+                               href="<?php /*echo $this->url('application/default', array('controller' => 'index', 'action' => 'fopeNroItem')); */?>">
+                                <i class="icon-bulb"></i>
+                                Nro de Item
+                            </a>
+                        </li>
+                    </ul>-->
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Reutilizar POAI - Operador"
+                    id="id_reutilizar_poai_configuracion" data-text="id_reutilizar_poai_configuracion">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'fopeVerUltimoPoaiLlenado')); ?>">
+                        <i class="icon-bulb"></i>
+                        Reutilizar POAI
+                    </a>
+                    <!--<ul class="sub-menu">
+                        <li class="item-menu tooltips"
+                            data-container="body" data-placement="right" data-html="true" data-original-title=" Nro de Item"
+                            id="id_ver_ultimo_poai_llenado_configuracion" data-text="id_ver_ultimo_poai_llenado_configuracion">
+                            <a class="ajaxify"
+                               href="<?php /*echo $this->url('application/default', array('controller' => 'index', 'action' => 'fopeVerUltimoPoaiLlenado')); */?>">
+                                <i class="icon-bulb"></i>
+                                Ver ultimo POAI llenado
+                            </a>
+                        </li>
+                         <li class="item-menu tooltips"
+                            data-container="body" data-placement="right" data-html="true" data-original-title=" Nro de Item"
+                            id="id_historial_poais_configuracion" data-text="id_ver_poai_gestion_configuracion">
+                            <a class="ajaxify"
+                               href="<?php /*echo $this->url('application/default', array('controller' => 'index', 'action' => 'fopeVerPoaiPorGestion')); */?>">
+                                <i class="icon-bulb"></i>
+                                Historial POAI's
+                            </a>
+                        </li>
+                    </ul>-->
+                </li>
+            </ul>
+
+        </li>
+
+        <li class="menucito " id="formulacion">
+            <a href="javascript:;">
+                <i class="icon-bulb"></i>
+                <span class="title">Formulacion</span>
+                <!--<span class="selected" id="cc"></span>-->
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+
+
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Formular POAI - Operador"
+                    id="id_formular_poai_formulacion" data-text="id_formular_poai_formulacion">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('formulacion/default', array('controller' => 'index', 'action' => 'index')); ?>">
+                        <i class="icon-bulb"></i>
+                        Formular POAI
+                    </a>
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Formular POAI - Operador"
+                    id="id_formular_unidades_formulacion" data-text="id_formular_unidades_formulacion">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('formulacion/default', array('controller' => 'index', 'action' => 'lista-unidades')); ?>">
+                        <i class="icon-bulb"></i>
+                        Unidades
+                    </a>
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Reutilizar POAI - Operador"
+                    id="id_reutilizar_poai_formulacion" data-text="id_reutilizar_poai_formulacion">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'fopeVerUltimoPoaiLlenado')); ?>">
+                        <i class="icon-bulb"></i>
+                        Reutilizar POAI
+                    </a>
+                    <!--<ul class="sub-menu">
+                        <li class="item-menu tooltips"
+                            data-container="body" data-placement="right" data-html="true" data-original-title=" Nro de Item"
+                            id="id_ver_ultimo_poai_llenado_formulacion" data-text="id_ver_ultimo_poai_llenado_formulacion">
+                            <a class="ajaxify"
+                               href="<?php /*echo $this->url('application/default', array('controller' => 'index', 'action' => 'fopeVerUltimoPoaiLlenado')); */?>">
+                                <i class="icon-bulb"></i>
+                                Ver ultimo POAI llenado
+                            </a>
+                        </li>
+                        <li class="item-menu tooltips"
+                            data-container="body" data-placement="right" data-html="true" data-original-title=" Nro de Item"
+                            id="id_historial_poais_formulacion" data-text="id_ver_poai_gestion_formulacion">
+                            <a class="ajaxify"
+                               href="<?php /*echo $this->url('application/default', array('controller' => 'index', 'action' => 'fopeVerPoaiPorGestion')); */?>">
+                                <i class="icon-bulb"></i>
+                                Historial POAI's
+                            </a>
+                        </li>
+                    </ul>-->
+                </li>
+            </ul>
+
+        </li>
+
+        <li class="menucito " id="seguimiento">
+            <a href="javascript:;">
+                <i class="icon-graph"></i>
+                <span class="title">Seguimiento</span>
+                <span class="selected" id="cc"></span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Control de Seguimiento - Admnistrador"
+                    id="id_control_seguimiento" data-text="id_control_seguimiento">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'sadmControlAvance')); ?>">
+                        <i class="icon-graph"></i>
+                        Control de Seguimiento
+                    </a>
+                </li>
+
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Control de Avance"
+                    id="id_control_avance_1_seguimiento" data-text="id_control_avance_1_seguimiento">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'sadmControlAvance')); ?>">
+                        <i class="icon-graph"></i>
+                        -- Control de Avance
+                    </a>
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Registro de Actividades"
+                    id="id_registro_actividades_seguimiento" data-text="id_registro_actividades_seguimiento">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'sadmRegistroActividades')); ?>">
+                        <i class="icon-graph"></i>
+                        -- Registro de Actividades
+                    </a>
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Registro de Acontecimientos"
+                    id="id_registro_acontecimientos_seguimiento" data-text="id_registro_acontecimientos_seguimiento">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'sadmRegistroAcontecimientos')); ?>">
+                        <i class="icon-graph"></i>
+                        -- Registro de Acontecimientos
+                    </a>
+                </li>
+
+
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Historial de Asignaciones - Administrador"
+                    id="id_historial_asignaciones_seguimiento" data-text="id_historial_asignaciones_seguimiento">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'sadmHistorialAsignaciones2')); ?>">
+                        <i class="icon-graph"></i>
+                        Historial de Asignaciones
+                    </a>
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Busqueda de Actividades - Administrador"
+                    id="id_busqueda_actividades_seguimiento" data-text="id_busqueda_actividades_seguimiento">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'sadmBusquedaActividades2')); ?>">
+                        <i class="icon-graph"></i>
+                        Busqueda de Actividades
+                    </a>
+                </li>
+
+
+                <!--                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Control de Avance - Elaborador"
+                    id="id_control_avance_2_seguimiento" data-text="id_control_avance_2_seguimiento">
+                    <a class="ajaxify"
+                       href="<?php /*echo $this->url('application/default', array('controller' => 'index', 'action' => 'selabRegistroActividades')); */?>">
+                        <i class="icon-graph"></i>
+                        Control de Avance
+                    </a>
+                    <ul class="sub-menu">
+                         <li class="item-menu tooltips"
+                        data-container="body" data-placement="right" data-html="true" data-original-title="Registro de Actividades"
+                        id="id_registro_actividades_seguimiento" data-text="id_registro_actividades_seguimiento">
+                        <a class="ajaxify"
+                           href="<?php /*echo $this->url('application/default', array('controller' => 'index', 'action' => 'selabRegistroActividades')); */?>">
+                        <i class="icon-graph"></i>
+                        Registro de Actividades</a>
+                        </li>
+                        <li class="item-menu tooltips"
+                        data-container="body" data-placement="right" data-html="true" data-original-title="Registro de Acontecimientos"
+                        id="id_registro_acontecimientos_seguimiento" data-text="id_registro_acontecimientos_seguimiento">
+                        <a class="ajaxify"
+                           href="<?php /*echo $this->url('application/default', array('controller' => 'index', 'action' => 'selabRegistroAcontecimientos')); */?>">
+                        <i class="icon-graph"></i>
+                        Registro de Acontecimientos</a>
+                        </li>
+                        <li class="item-menu tooltips"
+                        data-container="body" data-placement="right" data-html="true" data-original-title="Control de Avance"
+                        id="id_control_avance_3_seguimiento" data-text="id_control_avance_3_seguimiento">
+                        <a class="ajaxify"
+                           href="<?php /*echo $this->url('application/default', array('controller' => 'index', 'action' => 'selabControlAvance2')); */?>">
+                        <i class="icon-graph"></i>
+                        Control de Avance</a>
+                        </li>
+                    </ul>
+                </li>-->
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Historial - Cambios - Elaborador"
+                    id="id_historial_cambios_seguimiento" data-text="id_historial_cambios_seguimiento">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'selabHistorialCambios2')); ?>">
+                        <i class="icon-graph"></i>
+                        Historial - Cambios
+                    </a>
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Busqueda de Actividades - Elaborador"
+                    id="id_busqueda_actividades_3_seguimiento" data-text="id_busqueda_actividades_3_seguimiento">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'selabBusquedaActividades2')); ?>">
+                        <i class="icon-graph"></i>
+                        Busqueda de Actividades
+                    </a>
+                </li>
+
+
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Actividades Realizadas en la Gestion - Operador"
+                    id="id_actividades_realizadas_gestion_seguimiento" data-text="id_actividades_realizadas_gestion_seguimiento">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'sopeActividadesRealizadasGestion')); ?>">
+                        <i class="icon-graph"></i>
+                        Actividades Realizadas en la Gestion
+                    </a>
+                </li>
+
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Busqueda de Actividades - Operador"
+                    id="id_busqueda_atividades_5_seguimiento" data-text="id_busqueda_atividades_5_seguimiento">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'sopeBusquedaActividades2')); ?>">
+                        <i class="icon-graph"></i>
+                        Busqueda de Actividades
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="menucito " id="evaluacion">
+            <a href="javascript:;">
+                <i class="icon-bar-chart"></i>
+                <span class="title">Evaluacion</span>
+                <span class="selected" id="cc"></span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title=" Control de Avance - Administrador"
+                    id="id_control_avance_evaluacion" data-text="id_control_avance_evaluacion">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'eadmControlAvance2')); ?>">
+                        <i class="icon-bar-chart"></i>
+                        Control de Avance
+                    </a>
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Reportes de POAI's - Administrador"
+                    id="id_reportes_poais_evaluacion" data-text="id_reportes_poais_evaluacion">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'eadmReportesPoais2')); ?>">
+                        <i class="icon-bar-chart"></i>
+                        Reportes de POAI's
+                    </a>
+                </li>
+
+
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title=" Control de Avance - Elaborador"
+                    id="id_control_avance_3_evaluacion" data-text="id_control_avance_3_evaluacion">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'eelabControlAvance2')); ?>">
+                        <i class="icon-bar-chart"></i>
+                        Control de Avance
+                    </a>
+
+                </li>
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Reportes de POAI's - Elaborador"
+                    id="id_reportes_poais_3_evaluacion" data-text="id_reportes_poais_3_evaluacion">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'eelabReportesPoais2')); ?>">
+                        <i class="icon-bar-chart"></i>
+                        Reportes de POAI's
+                    </a>
+                </li>
+
+
+                <li class="item-menu tooltips"
+                    data-container="body" data-placement="right" data-html="true" data-original-title="Resultados de la Evaluacion - Operador"
+                    id="id_resultados_evaluacion" data-text="id_resultados_evaluacion">
+                    <a class="ajaxify"
+                       href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'eopeResultadosEvaluacion2')); ?>">
+                        <i class="icon-bar-chart"></i>
+                        Resultados de la Evaluacion
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+
+    </ul>
+</div>

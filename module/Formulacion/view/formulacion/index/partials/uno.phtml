@@ -1,0 +1,417 @@
+<div class="row">
+    <div class="col-md-2 col-sm-2 col-xs-2">
+        <ul class="nav nav-tabs tabs-left">
+            <li class="active">
+                <a href="#tab_6_1" data-toggle="tab">
+                    1.1. Datos del Puesto </a>
+            </li>
+            <li>
+                <a href="#tab_6_2" data-toggle="tab">
+                    1.2. Relaciones del Puesto </a>
+            </li>
+
+        </ul>
+    </div>
+    <div class="col-md-10 col-sm-10 col-xs-10"
+         style="border: 1px solid #b4b4b4; background-color: #f6f6f6; margin-left: -15px">
+
+        <div class="tab-content">
+
+            <div class="tab-pane active" id="tab_6_1">
+                <div class="">
+
+                    <div class="form-group form-sm-line-input">
+                        <div class="">
+                            <label class="control-label col-md-3">Nro de Item <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="puesto[id_nro_item]" id="puesto[id_nro_item]"
+                                       value="<?php echo $this->puestoPoai['nro_item'] ?>" disabled/>
+                                <!--<span class="help-block">Nro de Item </span>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-sm-line-input">
+                        <div class="">
+                            <label class="control-label col-md-3">Nivel <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="puesto[id_nivel]" id="puesto[id_nivel]"
+                                       placeholder="Ingrese Nivel..."
+                                       value="<?php echo $this->puestoPoai['nivel'] ?>" disabled/>
+                                <!--<span class="help-block"> Nivel. </span>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-sm-line-input">
+                        <div class="">
+                            <label class="control-label col-md-3">Categoría <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="puesto[id_categoria]" id="id_categoria"
+                                       value="<?php echo $this->puestoPoai['categoria'] ?>" disabled/>
+                                <!--<span class="help-block"> Categoría </span>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-sm-line-input">
+                        <div class="">
+                            <label class="control-label col-md-3">Denominación del cargo <span
+                                        class="required"> * </span>
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="puesto[id_cargo]" id="id_cargo"
+                                       value="<?php echo $this->puestoPoai['denominacion_cargo'] ?>"/>
+                                <!--<span class="help-block">Denominación del cargo </span>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-sm-line-input">
+                        <div class="">
+                            <label class="control-label col-md-3">Denominación del puesto <span
+                                        class="required"> * </span>
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="puesto[id_puesto]" id="id_puesto"
+                                       value="<?php echo $this->puestoPoai['denominacion_puesto'] ?>"/>
+                                <!--<span class="help-block">Denominación del puesto </span>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-sm-line-input">
+                        <div class="">
+                            <label class="control-label col-md-3">Dependencia <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="puesto[id_dependencia]" id="id_dependencia"
+                                       value="<?php echo $this->puestoPoai['dependencia_organizacional'] ?>" disabled/>
+                                <!--<span class="help-block">Dependencia </span>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab_6_2">
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="portlet box blue  bordered">
+                                <div class="portlet-title">
+                                    <div class="caption font-white-sunglo">
+                                        <i class="icon-settings font-white-sunglo"></i>
+                                        <span class="caption-subject bold uppercase"> 1.2.1. Relaciones Jerárquicas</span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <!--<div class="col-md-offset-1 col-md-4">-->
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <!--<input type="text" class="form-control" id="form_control_1">-->
+                                                    <label for="id_depende_de" class="control-label">Depende de: </label>
+                                                    <select class="form-control small" id="id_depende_de" name="relacion[id_depende_de]">
+                                                        <option value="">Seleccione...</option>
+                                                        <option value="0">NINGUNO</option>
+                                                        <?php
+                                                        //foreach($this->listaRelacionPuesto as $dependeDeIdPuesto => $dependeDePuesto) {
+                                                        foreach ($this->listaRelacionPuestoDepende as $dependeDePuesto) {
+                                                            ?>
+                                                            <option value="<?php echo $dependeDePuesto['puesto'] ?>"
+                                                                <?php echo $dependeDePuesto['selected']; ?>
+                                                            ><?php echo $dependeDePuesto['puesto'] ?></option>
+                                                        <?php } ?>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-7">
+                                                <div class="col-md-offset-1 col-md-6">
+                                                    <div class="form-group">
+                                                        <!--<label for="form_control_1" class="control-label">Supervisa a: </label>
+                                                        <input type="text" class="form-control small" id="form_control_1">-->
+
+                                                        <div class="form-group">
+                                                            <!--<input type="text" class="form-control" id="form_control_1">-->
+                                                            <label for="supervisa_1" class="control-label">Supervisa a: </label>
+                                                            <select class="form-control small" id="combo_supervisa"
+                                                                    name="combo_supervisa">
+                                                                <option value="">Seleccione...</option>
+                                                                <option value="0">NINGUNO</option>
+                                                                <?php
+                                                                //foreach($this->listaRelacionPuesto as $dependeDeIdPuesto => $dependeDePuesto) {
+                                                                foreach ($this->listaRelacionPuestoSupervisa as $dependeDePuesto) {
+                                                                    ?>
+                                                                    <option value="<?php echo $dependeDePuesto['id_puesto'] ?>"
+                                                                        <?php echo $dependeDePuesto['selected']; ?>
+                                                                    ><?php echo $dependeDePuesto['puesto'] ?></option>
+                                                                <?php } ?>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-offset-1 col-md-2">
+                                                    <div class="form-group ">
+                                                        <label for="form_control_6" class="control-label">Cantidad: </label>
+                                                        <input type="number" class="form-control small" id="cantidad_supervisa">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-offset-1 col-md-1">
+                                                    <div class="form-group">
+                                                        <label for="form_control_7" class="control-label">Add</label>
+                                                        <button id="adicionarItemSupervisa" class="btn btn-success btn-sm"
+                                                                type="button">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div id="divTablaSupervisa">
+                                                    <?php echo $this->widgetItemsSupervisa; ?>
+                                                </div>
+                                                <div id="divTablaSupervisaError"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="portlet box blue  bordered">
+                                <div class="portlet-title">
+                                    <div class="caption font-white-sunglo">
+                                        <i class="icon-settings font-white-sunglo"></i>
+                                        <span class="caption-subject bold uppercase"> 1.2.2. Relaciones Intrainstitucionales</span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <div class="row">
+                                        <div class="col-md-offset-1 col-md-9">
+                                            <div class="col-md-12" >
+                                                <div class="form-group form-sm-line-input">
+                                                    <label class="control-label">Ingrese: </label>
+                                                    <!--  <input type="text" class="form-control" id="funcionGeneral" name="funcionGeneral"> -->
+                                                    <textarea class="form-control" rows="1" cols="" maxlength="255" id="funcionGeneral"  name="funcionGeneral"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label class="control-label">&nbsp;</label><br>
+                                            <button id="adicionarFuncionGeneral" class="btn btn-success btn-sm" title="Adicionar"
+                                                    type="button">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                    </div>
+
+                                    <div id="divTablaFuncionesGenerales">
+                                        <?php echo $this->widgetItemsSupervisa; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="portlet box blue  bordered">
+                                <div class="portlet-title">
+                                    <div class="caption font-white-sunglo">
+                                        <i class="icon-settings font-white-sunglo"></i>
+                                        <span class="caption-subject bold uppercase"> 1.2.3. Relaciones Interinstitucionales</span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                    <div class="row">
+                                        <div class="col-md-offset-1 col-md-9">
+                                            <div class="col-md-12" >
+                                                <div class="form-group form-sm-line-input">
+                                                    <label class="control-label">Ingrese: </label>
+                                                    <!--  <input type="text" class="form-control" id="funcionGeneral" name="funcionGeneral"> -->
+                                                    <textarea class="form-control" rows="1" cols="" maxlength="255" id="funcionGeneral"  name="funcionGeneral"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label class="control-label">&nbsp;</label><br>
+                                            <button id="adicionarFuncionGeneral" class="btn btn-success btn-sm" title="Adicionar"
+                                                    type="button">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                    </div>
+
+                                    <div id="divTablaFuncionesGenerales">
+                                        <?php echo $this->widgetItemsSupervisa; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    jQuery(document).ready(function () {
+
+        $('#id_depende_de').on('change',function (e) {
+
+            var descripcionPuesto = $(this).val();
+            var idGp = <?php echo $this->idGp ?>;
+            var idPoai = <?php echo $this->idPoai ?>;
+
+            console.log(descripcionPuesto);
+
+            if(descripcionPuesto == ""){
+                return false;
+            }
+
+           // var pageContentBody = $('#div_tree_content');
+
+            var url = '/formulacion/index/save-detalle-depende';
+            e.preventDefault();
+            Metronic.startPageLoading();
+            $.ajax({
+                url: url,
+                data: {id: idGp,id2: idPoai,id3: descripcionPuesto,},
+                type: 'GET',
+                async: false,
+                dataType: "json",
+                success: function (data) {
+                    Metronic.stopPageLoading();
+                    if (data.respuesta) {
+                        Metronic.startPageLoading();
+                        //jQuery('.page-content-body').load(url_callback);
+                       // pageContentBody.load(url_callback);
+                        //jQuery('#result').load(url_callback);
+                        //jQuery('.page-content .page-content-body').load(url_callback);
+                        Metronic.stopPageLoading();
+                        toastr.success(data.mensaje, 'SUCCESS');
+                    } else {
+                        toastr.error(data.mensaje, 'ERROR');
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    toastr.error('OCURRIÓ UN ERROR AL EJECUTAR LA PAGINA', 'ERROR');
+                    Metronic.stopPageLoading();
+                }
+            });
+
+        });
+    });
+
+    var counterSupervisa = 3;
+    $('#adicionarItemSupervisa').click(function () {
+
+        var $swSend = 0;
+        var idGp = <?php echo $this->idGp ?>;
+        var idPoai = <?php echo $this->idPoai ?>;
+        var idPuesto = $('#combo_supervisa').val();
+        var cantidad = $('#cantidad_supervisa').val();
+        var puesto = $('#combo_supervisa option:selected').text();
+
+        $('#combo_supervisa').removeAttr('style');
+        $('#cantidad_supervisa').removeAttr('style');
+        if (idPuesto == '') {
+            //$('#labelerror_act').show();
+            //alert('Ingrese Supervisor');
+        $('#combo_supervisa').attr('style','border-color: red');
+            $swSend = 1;
+        } else if (cantidad == '') {
+            //$('#labelerror_qty').show();
+            //alert('Ingrese cantidad');
+            $('#cantidad_supervisa').attr('style','border-color: red');
+            $swSend = 1;
+        } else {
+            // $('#labelerror_act').hide();
+            //$('#labelerror_qty').hide();
+
+            $swSend = 0;
+        }
+
+        if ($swSend == 0) {
+
+            var vsl_mensaje = "ESTA SEGURO DE ADICIONAR EL ITEM?";
+            bootbox.confirm(vsl_mensaje, function(result) {
+                if(result){
+                    sendDet('/formulacion/index/save-detalle-supervisa', idGp, idPoai, puesto, cantidad, idPuesto);
+
+
+                }
+            });
+
+            var newTr = $('<tr></tr>').attr("id", 'linea_' + idPoai + '_' + idPuesto);
+            newTr.html('<td class="text-center">' + counterSupervisa +
+                '<input type="hidden" id="id_puesto_supervisa_' + idPuesto + '" name="id_puesto_supervisa_' + idPuesto + '" value="' + idPuesto + '">' +
+                '</td>' +
+                '<td class="text-left">' + puesto + '</td>' +
+                '<td class="text-center">' + cantidad + '</td>' +
+                '<td class="text-center">' +
+                '<button id="removeButton" class="btn btn-danger btn-sm" type="button"' +
+                'onclick="eliminarItemSupervision(<?php echo $this->idGp ?>,<?php echo $this->idPoai ?>,' + idPuesto + ')">' +
+                '<i class="fa fa-minus"></i>' +
+                '</button>' +
+                '</td>');
+            // newTr.appendTo("#tbl_items_supervisa");
+
+            counterSupervisa++;
+
+
+
+            //$('#act_id > option[value="0"]').attr('selected', 'selected');
+            //$('#s2id_act_id > .select2-choice > .select2-chosen').empty();
+        }
+    });
+
+    function sendDet(url, idGp, idPoai, supervisa, cantidad, idPuesto) {
+        Metronic.startPageLoading();
+        $.ajax({
+            url: url,
+            data: {id: idGp, id2: idPoai, id3: supervisa, id4: cantidad, id5: idPuesto},
+            cache: false,
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                if (data.respuesta) {
+                    Metronic.startPageLoading();
+                    $('#combo_supervisa').val('');
+                    $('#cantidad_supervisa').val('');
+                    jQuery('#divTablaSupervisa').load('/formulacion/index/lista-items-supervisa/1/' + idGp + '/' + idPoai);
+                    Metronic.stopPageLoading();
+                    toastr.success(data.mensaje, 'SUCCESS');
+                } else {
+                    toastr.error(data.mensaje, 'ERROR');
+                }
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr);
+                console.log(ajaxOptions);
+                console.log(thrownError);
+                $('#divTablaSupervisaError').html('<div class="label label-danger">OCURRIO UN ERROR EN LA CARGA DE LA PAGINA...</div>');
+                Metronic.stopPageLoading();
+            }
+        });
+
+
+    }
+
+</script>

@@ -1,0 +1,165 @@
+<style>
+    .color-link{
+        /*color:#ffffff;*/
+
+        text-align: left;
+        font-size: 12px;
+        letter-spacing: 0px;
+        font-weight: 300;
+        color: #fff;
+
+    }
+    .color-link a{
+        color:#ffffff;
+
+    }
+    .huge {
+        font-size: 25px;
+    }
+    .dashboard-stat .visual i{
+        font-size: 25px;
+        line-height: 10px;
+    }
+
+</style>
+
+<h3 class="page-title">
+    Pagina de Inicio  <small> </small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="/">Principal</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="inicio">Página de Inicio</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+
+<div class="row">
+    
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" >
+        <div class="dashboard-stat red-intense">
+            <div class="visual">
+                
+                <i class="fa fa-globe"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    FORMULACIÓN
+                </div>
+            </div>
+            <a class="more" href="javascript:;" onmouseover="showHideTexto('F')">
+                Ver mas <i class="m-icon-swapright m-icon-white"></i>
+                 </a>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="dashboard-stat green-haze">
+            <div class="visual">
+                <i class="fa fa-shopping-cart"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    SEGUIMIENTO
+                </div>
+            </div>
+            <a class="more" href="javascript:;" onmouseover="showHideTexto('S')">
+                Ver mas <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="dashboard-stat yellow">
+            <div class="visual">
+                <i class="fa fa-bar-chart-o"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    EVALUACIÓN
+                </div>
+            </div>
+            <a class="more" href="javascript:;" onmouseover="showHideTexto('E')">
+                Ver mas <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="area_texto" style="margin: 2% 2% 2% 2%; font-size: 20px"></div>
+
+<div class="clearfix"></div>
+
+<?php //\Zend\Debug\Debug::dump($this->resultado); ?>
+
+<div id="frame-formulacion" style="text-align: justify;  display: none">
+    <div class="panel panel-danger">
+        <div class="panel-heading"> FORMULACI&Oacute;N</div>
+        <div class="panel-body">
+            <p>
+                "El Programa Operativo Anual (POA) del Ministerio de Economía y Finanzas
+                Públicas, es un instrumento de gestión que orienta las acciones hacia los
+                resultados institucionales claramente definidos, los mismos que son objeto
+                de seguimiento en tiempo de ejecución de POA y de retroalimentación en
+                tiempo de evaluación y seguimiento.
+                <br/>
+                El nuevo Sistema Integrado POA-Presupuesto (SIPP), facilita la formulación
+                del POA de las áreas organizacionales del Ministerio y la consolidación del
+                POA y Presupuesto institucionales.”
+            </p>
+        </div>
+    </div>
+</div>
+<div id="frame-evaluacion" style="text-align: justify;  display: none">
+    <div class="panel panel-warning">
+        <div class="panel-heading"> EVALUACIÓN</div>
+        <div class="panel-body">
+            <p>
+                El nuevo Sistema Integrado POA-Presupuesto (SIPP), permitiría realizar una
+                evaluación eficiente y oportuna del POA y Presupuesto institucionales a
+                través de la incorporación de instrumentos y criterios adecuados de
+                consolidación de información.”
+            </p>
+        </div>
+    </div>
+</div>
+<div id="frame-seguimiento" style="text-align: justify;  display: none">
+    <div class="portlet box green">
+        <div class="portlet-title"> SEGUIMIENTO</div>
+        <div class="portlet-body">
+            <p>
+                “El Seguimiento Físico consiste en determinar el porcentaje de cumplimiento
+                de las operaciones y objetivos específicos y de gestión establecidos en el
+                POA institucional.
+
+            </p>
+            El nuevo Sistema Integrado POA-Presupuesto (SIPP), obtiene indicadores de ejecución necesarios para
+            el
+            seguimiento.”
+            </p>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    function showHideTexto(fase) {
+
+        var html = "";
+        if (fase == 'F') {
+            html = $("#frame-formulacion").html();
+        } else if (fase == 'E') {
+            html = $("#frame-evaluacion").html();
+        } else if (fase == 'S') {
+            html = $("#frame-seguimiento").html();
+        }
+
+        $("#area_texto").html(html);
+    }
+</script>

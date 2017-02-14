@@ -1,0 +1,92 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * FObjetivos
+ *
+ * @ORM\Table(name="f_objetivos", indexes={@ORM\Index(name="IDX_CC7BE929CA586C85", columns={"id_poai"})})
+ * @ORM\Entity
+ */
+class FObjetivos
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_objetivo", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="f_objetivos_id_objetivo_seq", allocationSize=1, initialValue=1)
+     */
+    private $idObjetivo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="objetivo_a", type="string", length=2500, nullable=true)
+     */
+    private $objetivoA;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="objetivo_b", type="string", length=2500, nullable=true)
+     */
+    private $objetivoB;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="objetivo_c", type="string", length=2500, nullable=true)
+     */
+    private $objetivoC;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="boolean", nullable=true)
+     */
+    private $estado;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var \Application\Entity\FPoai
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\FPoai")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_poai", referencedColumnName="id_poai")
+     * })
+     */
+    private $idPoai;
+
+
+}

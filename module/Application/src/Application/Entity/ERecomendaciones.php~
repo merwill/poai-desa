@@ -1,0 +1,92 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ERecomendaciones
+ *
+ * @ORM\Table(name="e_recomendaciones", indexes={@ORM\Index(name="IDX_ECCB5B0F7B674A84", columns={"id_evaluacion"})})
+ * @ORM\Entity
+ */
+class ERecomendaciones
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_recomendaciones", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="e_recomendaciones_id_recomendaciones_seq", allocationSize=1, initialValue=1)
+     */
+    private $idRecomendaciones;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="debe_mejorar", type="string", length=225, nullable=true)
+     */
+    private $debeMejorar;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="accion_propuesta", type="string", length=225, nullable=true)
+     */
+    private $accionPropuesta;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_inicio", type="datetime", nullable=true)
+     */
+    private $fechaInicio;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_fin", type="datetime", nullable=true)
+     */
+    private $fechaFin;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var \Application\Entity\EEvaluacion
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\EEvaluacion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_evaluacion", referencedColumnName="id_evaluacion")
+     * })
+     */
+    private $idEvaluacion;
+
+
+}

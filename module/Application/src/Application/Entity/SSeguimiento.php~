@@ -1,0 +1,120 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * SSeguimiento
+ *
+ * @ORM\Table(name="s_seguimiento", indexes={@ORM\Index(name="IDX_2C903A44859D0DF2", columns={"id_reunion"})})
+ * @ORM\Entity
+ */
+class SSeguimiento
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_seguimiento", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="s_seguimiento_id_seguimiento_seq", allocationSize=1, initialValue=1)
+     */
+    private $idSeguimiento;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nro_seguimiento", type="integer", nullable=true)
+     */
+    private $nroSeguimiento;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="operacion", type="string", length=500, nullable=true)
+     */
+    private $operacion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="resultado_cantidad", type="integer", nullable=true)
+     */
+    private $resultadoCantidad;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="resultado_oportunidad", type="string", length=225, nullable=true)
+     */
+    private $resultadoOportunidad;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="resultado_indicador", type="integer", nullable=true)
+     */
+    private $resultadoIndicador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="medio_verificacion", type="string", length=225, nullable=true)
+     */
+    private $medioVerificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="acciones", type="string", length=500, nullable=true)
+     */
+    private $acciones;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="datetime", nullable=true)
+     */
+    private $fecha;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var \Application\Entity\SReunionSeguimiento
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\SReunionSeguimiento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_reunion", referencedColumnName="id_reunion")
+     * })
+     */
+    private $idReunion;
+
+
+}

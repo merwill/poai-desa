@@ -1,0 +1,85 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * SPositivos
+ *
+ * @ORM\Table(name="s_positivos", indexes={@ORM\Index(name="IDX_7E2200B747E935B6", columns={"id_acontecimiento"})})
+ * @ORM\Entity
+ */
+class SPositivos
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_positivo", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="s_positivos_id_positivo_seq", allocationSize=1, initialValue=1)
+     */
+    private $idPositivo;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="datetime", nullable=true)
+     */
+    private $fecha;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcion", type="string", length=225, nullable=true)
+     */
+    private $descripcion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comportamiento", type="string", length=225, nullable=true)
+     */
+    private $comportamiento;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_elaboracion", type="datetime", nullable=true)
+     */
+    private $fechaElaboracion;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime", nullable=true)
+     */
+    private $fechaModificacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="elaborador", type="string", length=100, nullable=true)
+     */
+    private $elaborador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modificador", type="string", length=100, nullable=true)
+     */
+    private $modificador;
+
+    /**
+     * @var \Application\Entity\SAcontecimientosNotables
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\SAcontecimientosNotables")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_acontecimiento", referencedColumnName="id_acontecimiento")
+     * })
+     */
+    private $idAcontecimiento;
+
+
+}
